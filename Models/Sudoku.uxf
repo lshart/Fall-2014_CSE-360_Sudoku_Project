@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>301</x>
+      <y>329</y>
+      <w>259</w>
+      <h>196</h>
+    </coordinates>
+    <panel_attributes>BoardManager
+--
+-board:		Cell[9][9]
+-hints:		int
+-time:		int
+-parTime:	int
+-overTime: 	bool = false
+--
++placeNum (row: int, col: int, numToPlace: int):	bool
++removeNum (row: int, col: int): 						bool
++useHint():														bool
++updateTime():													bool
++getParTime():													int
++getTime():														int
+-checkPlace(row: int, col: int, numToCheck: int):	bool
+-colCheck(col: int, numToCheck: int):					bool
+-rowCheck(row: int, numToCheck: int):					bool
+-BlockCheck(block: int, numToCheck: int):				bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>665</x>
+      <y>441</y>
+      <w>252</w>
+      <h>196</h>
+    </coordinates>
+    <panel_attributes>Cell
+--
+-row:		int
+-column:	int
+-group:	int
+-value:	int
+-answer:	int
+-isClue:	bool
+--
++Clue(row: int, col: int, group: int, answer: int, clue: bool)
++toString:		String
++getRow():		int
++getColumn():	int
++getGroup():	int
++getValue():	int
++getAnswer():	int
++isClue():		bool
++makeAHint():	void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>553</x>
+      <y>378</y>
+      <w>126</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;110.0</additional_attributes>
+  </element>
+</diagram>
