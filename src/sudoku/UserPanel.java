@@ -1,12 +1,20 @@
 package sudoku;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
 
-public class UserPanel {
+public class UserPanel extends JFrame {
 
-	private JFrame frame;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
@@ -15,8 +23,8 @@ public class UserPanel {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UserPanel window = new UserPanel();
-					window.frame.setVisible(true);
+					UserPanel frame = new UserPanel();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -25,19 +33,19 @@ public class UserPanel {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the frame.
 	 */
 	public UserPanel() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 600, 800);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 600, 800);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(263, 317, 89, 23);
+		contentPane.add(btnNewButton);
 	}
 
 }

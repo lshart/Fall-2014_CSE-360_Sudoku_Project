@@ -4,10 +4,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>574</x>
-      <y>280</y>
+      <x>581</x>
+      <y>308</y>
       <w>259</w>
-      <h>245</h>
+      <h>266</h>
     </coordinates>
     <panel_attributes>BoardManager
 --
@@ -18,6 +18,7 @@
 -parTime:		int
 -overTime: 		bool = false
 -currentUser:	User
+-currentNum:	int
 --
 +BoardManager(difficulty: int, currentUser: User)
 +placeNum (row: int, col: int, numToPlace: int):	bool
@@ -26,6 +27,7 @@
 +updateTime():													bool
 +getParTime():													int
 +getTime():														int
++setCurrentNum(newNum: int):								void
 +getCurrentUser():											User
 -checkPlace(row: int, col: int, numToCheck: int):	bool
 -colCheck(col: int, numToCheck: int):					bool
@@ -36,8 +38,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>875</x>
-      <y>301</y>
+      <x>868</x>
+      <y>329</y>
       <w>252</w>
       <h>196</h>
     </coordinates>
@@ -64,18 +66,18 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>826</x>
-      <y>294</y>
-      <w>63</w>
+      <x>833</x>
+      <y>322</y>
+      <w>49</w>
       <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>294</x>
+      <x>301</x>
       <y>371</y>
       <w>252</w>
       <h>168</h>
@@ -100,7 +102,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>539</x>
+      <x>546</x>
       <y>364</y>
       <w>49</w>
       <h>21</h>
@@ -111,8 +113,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>294</x>
-      <y>567</y>
+      <x>301</x>
+      <y>560</y>
       <w>252</w>
       <h>91</h>
     </coordinates>
@@ -130,7 +132,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>7</x>
+      <x>14</x>
       <y>350</y>
       <w>252</w>
       <h>119</h>
@@ -151,29 +153,29 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>413</x>
+      <x>420</x>
       <y>532</y>
       <w>21</w>
-      <h>49</h>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>252</x>
+      <x>259</x>
       <y>385</y>
       <w>56</w>
-      <h>196</h>
+      <h>189</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;260.0</additional_attributes>
+    <additional_attributes>10.0;10.0;60.0;250.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>252</x>
+      <x>259</x>
       <y>364</y>
       <w>56</w>
       <h>21</h>
@@ -184,16 +186,157 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>49</x>
+      <x>588</x>
+      <y>581</y>
+      <w>399</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>SOME GUI DESIGN ADVICE
+--
+http://stackoverflow.com/questions/5124547/switching-between-windows-in-java-applcation
+http://www.austintek.com/mvc/#austintek_mvc.controller
+--
+here's some useful links about designing a gui</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>301</x>
       <y>63</y>
       <w>252</w>
-      <h>119</h>
+      <h>252</h>
     </coordinates>
     <panel_attributes>UserPanel
 --
-theUserManager: UserManager
+Reference to a UserManager
 --
-</panel_attributes>
+Four buttons to represent different difficulties, each with
+a listener to create a BoardManager of the selected
+difficulty and to switcher to the PuzzlePanel, passing
+that new BoardManager.
+
+Two text fields (with lables above), to enter a user name
+and a password.
+
+A button with listener to try to log in with the given user
+name and password.
+
+A button with listener to try and create a new user with 
+the given username and password.
+
+A lable to display the currently selected user (if there is
+one) and their score/best times.
+
+A quit button that tells the UserManager to 
+storeUserList()</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>588</x>
+      <y>28</y>
+      <w>329</w>
+      <h>259</h>
+    </coordinates>
+    <panel_attributes>PuzzlePanel
+--
+Reference to a BoardManager
+--
+A grid of 81 squares, that update with the contents of their respective cells
+
+A mouse listener that tells the BoardManager to atttempt to update the cell
+that was clicked on with the, but only if the pencil tool is selected. If 
+the eraser tool is selected tells the board manager to erase that cell.
+
+A keyboard listener to set the number and the pencil or eraser tool.  Also
+probably one for hints.
+
+Some icons to represent the status of the pencil and eraser tools.
+
+Some labels to display the current time and the Par time, both fetched from 
+the board manager.
+
+some.. thing that checks if a second has pased, and if so tells the 
+BoardManager to updateTime()
+
+A lable that displays messages, and lasts a few seconds.
+
+A quit game button, that returns to the UserPanel</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>21</x>
+      <y>28</y>
+      <w>252</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>main
+--
+--
+creates the UserManager, and has it load a specified file,
+
+creates UserPanel and PuzzlePanel
+
+gives focus to UserPanel</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>259</x>
+      <y>308</y>
+      <w>56</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>665</x>
+      <y>280</y>
+      <w>21</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>126</x>
+      <y>105</y>
+      <w>21</w>
+      <h>259</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;350.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>266</x>
+      <y>105</y>
+      <w>49</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>266</x>
+      <y>21</y>
+      <w>336</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>460.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
