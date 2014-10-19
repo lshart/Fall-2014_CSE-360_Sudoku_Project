@@ -4,25 +4,29 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>301</x>
-      <y>329</y>
+      <x>574</x>
+      <y>280</y>
       <w>259</w>
-      <h>196</h>
+      <h>245</h>
     </coordinates>
     <panel_attributes>BoardManager
 --
--board:		Cell[9][9]
--hints:		int
--time:		int
--parTime:	int
--overTime: 	bool = false
+-board:			Cell[9][9]
+-difficulty:	int
+-hints:			int
+-time:			int
+-parTime:		int
+-overTime: 		bool = false
+-currentUser:	User
 --
++BoardManager(difficulty: int, currentUser: User)
 +placeNum (row: int, col: int, numToPlace: int):	bool
 +removeNum (row: int, col: int): 						bool
 +useHint():														bool
 +updateTime():													bool
 +getParTime():													int
 +getTime():														int
++getCurrentUser():											User
 -checkPlace(row: int, col: int, numToCheck: int):	bool
 -colCheck(col: int, numToCheck: int):					bool
 -rowCheck(row: int, numToCheck: int):					bool
@@ -32,8 +36,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>665</x>
-      <y>441</y>
+      <x>875</x>
+      <y>301</y>
       <w>252</w>
       <h>196</h>
     </coordinates>
@@ -60,12 +64,136 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>553</x>
-      <y>378</y>
-      <w>126</w>
-      <h>91</h>
+      <x>826</x>
+      <y>294</y>
+      <w>63</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;160.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>294</x>
+      <y>371</y>
+      <w>252</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>User
+{Serializable}
+--
+-uName:			String
+-password:		String
+-winCount:		int[4] = 0
+-fastestTime:	int[4] = 0
+--
++User(uName: String, password: String)
++win(difficulty: int, time: int, underPar: bool):	void
++getFastestTime(difficulty: int):		int
++startedGame(difficulty: int):			void	
++checkPass(password: String):				bool
++nameToString():			String
++scoreToString():			String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>539</x>
+      <y>364</y>
+      <w>49</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>294</x>
+      <y>567</y>
+      <w>252</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>private: UserNode
+--
+-thisUser:	User
+-nextUser:	UserNode = NULL
+--
++UserNode(newUser: User)
++getUser():							User
++getNextUser():					UserNode
++setNextUser(next: userNode):	void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>7</x>
+      <y>350</y>
+      <w>252</w>
+      <h>119</h>
+    </coordinates>
+    <panel_attributes>UserManager
+--
+-selectedUser:			User = NULL
+-userListHead:			UserNode = NULL
+--
++UserManager()
++retrieveUserList(fileName: String):			bool
++storeUserList(fileName: String):				bool
++findUser(name: String, password: String):	bool
++addUser(name: String, password: String):		bool
++getSelectedUser():									User</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>413</x>
+      <y>532</y>
+      <w>21</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>385</y>
+      <w>56</w>
+      <h>196</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;260.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>364</y>
+      <w>56</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>49</x>
+      <y>63</y>
+      <w>252</w>
+      <h>119</h>
+    </coordinates>
+    <panel_attributes>UserPanel
+--
+theUserManager: UserManager
+--
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
