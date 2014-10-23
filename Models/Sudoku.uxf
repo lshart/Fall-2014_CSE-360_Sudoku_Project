@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>581</x>
-      <y>308</y>
+      <x>567</x>
+      <y>287</y>
       <w>259</w>
       <h>266</h>
     </coordinates>
@@ -16,31 +16,31 @@
 -hints:			int
 -time:			int
 -parTime:		int
--overTime: 		bool = false
+-overTime: 		boolean = false
 -currentUser:	User
 -currentNum:	int
 --
 +BoardManager(difficulty: int, currentUser: User)
-+placeNum (row: int, col: int, numToPlace: int):	bool
-+removeNum (row: int, col: int): 						bool
-+useHint():														bool
-+updateTime():													bool
++placeNum (row: int, col: int, numToPlace: int):	boolean
++removeNum (row: int, col: int): 						boolean
++useHint():														boolean
++updateTime():													boolean
 +getParTime():													int
 +getTime():														int
 +setCurrentNum(newNum: int):								void
 +getCurrentUser():											User
--checkPlace(row: int, col: int, numToCheck: int):	bool
--colCheck(col: int, numToCheck: int):					bool
--rowCheck(row: int, numToCheck: int):					bool
--BlockCheck(block: int, numToCheck: int):				bool</panel_attributes>
+-checkPlace(row: int, col: int, numToCheck: int):	boolean
+-colCheck(col: int, numToCheck: int):					boolean
+-rowCheck(row: int, numToCheck: int):					boolean
+-BlockCheck(block: int, numToCheck: int):				boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>868</x>
-      <y>329</y>
-      <w>252</w>
+      <x>847</x>
+      <y>308</y>
+      <w>266</w>
       <h>196</h>
     </coordinates>
     <panel_attributes>Cell
@@ -50,35 +50,35 @@
 -group:	int
 -value:	int
 -answer:	int
--isClue:	bool
+-isClue:	boolean
 --
-+Clue(row: int, col: int, group: int, answer: int, clue: bool)
-+toString:		String
++Cell(row: int, col: int, group: int, answer: int, clue: boolean)
++toString():	String
 +getRow():		int
 +getColumn():	int
 +getGroup():	int
 +getValue():	int
 +getAnswer():	int
-+isClue():		bool
-+makeAHint():	void</panel_attributes>
++isClue():		boolean
++makeAHint():	boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>833</x>
-      <y>322</y>
-      <w>49</w>
+      <x>819</x>
+      <y>301</y>
+      <w>42</w>
       <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>301</x>
-      <y>371</y>
+      <x>287</x>
+      <y>350</y>
       <w>252</w>
       <h>168</h>
     </coordinates>
@@ -91,10 +91,10 @@
 -fastestTime:	int[4] = 0
 --
 +User(uName: String, password: String)
-+win(difficulty: int, time: int, underPar: bool):	void
++win(difficulty: int, time: int, underPar: boolean):	void
 +getFastestTime(difficulty: int):		int
 +startedGame(difficulty: int):			void	
-+checkPass(password: String):				bool
++checkPass(password: String):				boolean
 +nameToString():			String
 +scoreToString():			String</panel_attributes>
     <additional_attributes/>
@@ -102,8 +102,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>546</x>
-      <y>364</y>
+      <x>532</x>
+      <y>343</y>
       <w>49</w>
       <h>21</h>
     </coordinates>
@@ -113,8 +113,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>301</x>
-      <y>560</y>
+      <x>287</x>
+      <y>539</y>
       <w>252</w>
       <h>91</h>
     </coordinates>
@@ -132,8 +132,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>14</x>
-      <y>350</y>
+      <x>0</x>
+      <y>329</y>
       <w>252</w>
       <h>119</h>
     </coordinates>
@@ -143,18 +143,18 @@
 -userListHead:			UserNode = NULL
 --
 +UserManager()
-+retrieveUserList(fileName: String):			bool
-+storeUserList(fileName: String):				bool
-+findUser(name: String, password: String):	bool
-+addUser(name: String, password: String):		bool
++retrieveUserList(fileName: String):			boolean
++storeUserList(fileName: String):				boolean
++findUser(name: String, password: String):	boolean
++addUser(name: String, password: String):		boolean
 +getSelectedUser():									User</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>420</x>
-      <y>532</y>
+      <x>406</x>
+      <y>511</y>
       <w>21</w>
       <h>42</h>
     </coordinates>
@@ -164,8 +164,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>259</x>
-      <y>385</y>
+      <x>245</x>
+      <y>364</y>
       <w>56</w>
       <h>189</h>
     </coordinates>
@@ -175,8 +175,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>259</x>
-      <y>364</y>
+      <x>245</x>
+      <y>343</y>
       <w>56</w>
       <h>21</h>
     </coordinates>
@@ -186,8 +186,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>588</x>
-      <y>581</y>
+      <x>574</x>
+      <y>560</y>
       <w>399</w>
       <h>63</h>
     </coordinates>
@@ -202,8 +202,8 @@ here's some useful links about designing a gui</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>301</x>
-      <y>63</y>
+      <x>287</x>
+      <y>42</y>
       <w>252</w>
       <h>252</h>
     </coordinates>
@@ -235,8 +235,8 @@ storeUserList()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>588</x>
-      <y>28</y>
+      <x>574</x>
+      <y>7</y>
       <w>329</w>
       <h>259</h>
     </coordinates>
@@ -269,8 +269,8 @@ A quit game button, that returns to the UserPanel</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>21</x>
-      <y>28</y>
+      <x>7</x>
+      <y>7</y>
       <w>252</w>
       <h>84</h>
     </coordinates>
@@ -287,8 +287,8 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>259</x>
-      <y>308</y>
+      <x>245</x>
+      <y>287</y>
       <w>56</w>
       <h>56</h>
     </coordinates>
@@ -298,8 +298,8 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>665</x>
-      <y>280</y>
+      <x>651</x>
+      <y>259</y>
       <w>21</w>
       <h>42</h>
     </coordinates>
@@ -309,8 +309,8 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>126</x>
-      <y>105</y>
+      <x>112</x>
+      <y>84</y>
       <w>21</w>
       <h>259</h>
     </coordinates>
@@ -320,8 +320,8 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>266</x>
-      <y>105</y>
+      <x>252</x>
+      <y>84</y>
       <w>49</w>
       <h>21</h>
     </coordinates>
@@ -331,8 +331,8 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>266</x>
-      <y>21</y>
+      <x>252</x>
+      <y>0</y>
       <w>336</w>
       <h>21</h>
     </coordinates>
