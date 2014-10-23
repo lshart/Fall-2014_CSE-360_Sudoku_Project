@@ -4,19 +4,25 @@ public class Cell
 {
 	private int row;
 	private int column;
-	private int group;
+	private Cell block;
 	private int value;
 	private int answer;
 	private boolean isClue;
 	
-	public void Clue (int ro, int col, int gro, int ans, boolean clue)
+	public Cell (int ro, int col, Cell blo, int ans, boolean clue)
 	{
 		row = ro;
 		column = col;
-		group = gro;
+		if (blo == null)
+			block = this;
+		else
+			block = blo;
 		answer = ans;
 		isClue = clue;
-		value = 0;
+		if (clue)
+			value = ans;
+		else
+			value = 0;
 	}
 	
 	public String toString()
@@ -39,14 +45,36 @@ public class Cell
 		return column;
 	}
 	
-	public int getGroup()
+	public Cell getBlock()
 	{
-		return group;
+		return block;
 	}
 	
 	public int getValue()
 	{
 		return value;
+	}
+	
+	public boolean setValue(int val)
+	{
+		if (value == 0 && !isClue)
+		{
+			value = val;
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean removeValue()
+	{
+		if (value == 0 && !isClue)
+			return false;
+		else
+		{	
+			value = 0;
+			return true;
+		}
 	}
 	
 	public int getAnswer()
@@ -61,10 +89,11 @@ public class Cell
 	
 	public boolean makeAHint()
 	{
-		if (isClue)
+		if (isClue && value == 0)
 			return false;
 		else
 		{
+			value = answer;
 			isClue = true;
 			return true;
 		}
