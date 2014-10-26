@@ -97,10 +97,10 @@
 +User(uName: String, password: String)
 +win(difficulty: int, time: int, underPar: boolean):	void
 +getFastestTime(difficulty: int):		int
-+startedGame(difficulty: int):			void	
++startGame(difficulty: int):				void	
 +checkPass(password: String):				boolean
-+nameToString():			String
-+scoreToString():			String
++getName():										String
++getScore(difficulty: int):				int
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -127,6 +127,7 @@
 --
 -selectedUser:			User = NULL
 -userListHead:			UserNode = NULL
+-numberOfUsers:		int = 0;
 --
 +UserManager()
 +retrieveUserList(fileName: String):			boolean
