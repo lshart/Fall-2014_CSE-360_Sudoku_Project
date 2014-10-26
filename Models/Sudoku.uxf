@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="13.0">
-  <zoom_level>4</zoom_level>
+  <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>324</x>
-      <y>276</y>
-      <w>148</w>
-      <h>164</h>
+      <x>830</x>
+      <y>410</y>
+      <w>370</w>
+      <h>410</h>
     </coordinates>
     <panel_attributes>BoardManager
 --
@@ -40,10 +40,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>484</x>
-      <y>288</y>
-      <w>148</w>
-      <h>124</h>
+      <x>1230</x>
+      <y>440</y>
+      <w>370</w>
+      <h>310</h>
     </coordinates>
     <panel_attributes>Cell
 --
@@ -70,10 +70,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>468</x>
-      <y>284</y>
-      <w>24</w>
-      <h>12</h>
+      <x>1190</x>
+      <y>430</y>
+      <w>60</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
@@ -81,10 +81,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>164</x>
-      <y>276</y>
-      <w>144</w>
-      <h>96</h>
+      <x>430</x>
+      <y>410</y>
+      <w>360</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>User
 {Serializable}
@@ -107,10 +107,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>304</x>
-      <y>272</y>
-      <w>28</w>
-      <h>72</h>
+      <x>780</x>
+      <y>400</y>
+      <w>70</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>50.0;160.0;10.0;10.0</additional_attributes>
@@ -118,16 +118,15 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>264</y>
-      <w>144</w>
-      <h>124</h>
+      <x>20</x>
+      <y>380</y>
+      <w>360</w>
+      <h>290</h>
     </coordinates>
     <panel_attributes>UserManager
 --
 -selectedUser:			User = NULL
 -userListHead:			UserNode = NULL
--numberOfUsers:		int = 0;
 --
 +UserManager()
 +retrieveUserList(fileName: String):			boolean
@@ -135,7 +134,6 @@
 +findUser(name: String, password: String):	boolean
 +addUser(name: String, password: String):		boolean
 +getSelectedUser():									User
-
 {innerclass
 private: UserNode
 --
@@ -152,10 +150,10 @@ innerclass}</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>140</x>
-      <y>272</y>
-      <w>32</w>
-      <h>12</h>
+      <x>370</x>
+      <y>400</y>
+      <w>80</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
@@ -163,10 +161,10 @@ innerclass}</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>92</x>
-      <y>392</y>
-      <w>228</w>
-      <h>36</h>
+      <x>250</x>
+      <y>700</y>
+      <w>570</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>SOME GUI DESIGN ADVICE
 --
@@ -179,10 +177,10 @@ here's some useful links about designing a gui</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>164</x>
-      <y>124</y>
-      <w>144</w>
-      <h>144</h>
+      <x>430</x>
+      <y>30</y>
+      <w>360</w>
+      <h>360</h>
     </coordinates>
     <panel_attributes>UserPanel
 --
@@ -212,10 +210,10 @@ storeUserList()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>328</x>
-      <y>116</y>
-      <w>188</w>
-      <h>148</h>
+      <x>840</x>
+      <y>10</y>
+      <w>470</w>
+      <h>370</h>
     </coordinates>
     <panel_attributes>PuzzlePanel
 --
@@ -246,10 +244,10 @@ A quit game button, that returns to the UserPanel</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>4</x>
-      <y>116</y>
-      <w>144</w>
-      <h>48</h>
+      <x>30</x>
+      <y>10</y>
+      <w>360</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>main
 --
@@ -264,10 +262,10 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>140</x>
-      <y>260</y>
-      <w>32</w>
-      <h>12</h>
+      <x>370</x>
+      <y>370</y>
+      <w>80</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
@@ -275,10 +273,10 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>372</x>
-      <y>260</y>
-      <w>12</w>
-      <h>24</h>
+      <x>950</x>
+      <y>370</y>
+      <w>30</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -286,10 +284,10 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>64</x>
-      <y>160</y>
-      <w>12</w>
-      <h>112</h>
+      <x>180</x>
+      <y>120</y>
+      <w>30</w>
+      <h>280</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;260.0;10.0;10.0</additional_attributes>
@@ -297,10 +295,10 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>144</x>
-      <y>160</y>
-      <w>28</w>
-      <h>12</h>
+      <x>380</x>
+      <y>120</y>
+      <w>70</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
@@ -308,10 +306,10 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>144</x>
-      <y>112</y>
-      <w>192</w>
-      <h>12</h>
+      <x>380</x>
+      <y>0</y>
+      <w>480</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>460.0;10.0;10.0;10.0</additional_attributes>
