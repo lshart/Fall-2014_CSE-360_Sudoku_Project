@@ -64,7 +64,7 @@ public class BoardManager
 		int count = 0; // a temporary count, used to assign the answers to the cells, as well as their clue status
 		for (int i = 0; i < SIZE; i++)
 			for (int k = 0; k < SIZE; k++)
-			{
+			{  // I actually just realized we don't need to have any reference to the base cell.  It's really easy to figure out from row and column
 				if (i % 3 == 0 && k % 3 == 0)					// this if statement is for assigning the base block
 					board[i][k] = new Cell(i, k, null, tempBoardAnswer[count], tempBoardClues[count]);
 				else
@@ -126,8 +126,12 @@ public class BoardManager
 	private boolean blockCheck(Cell blockBase, int numToCheck)
 	{
 		boolean unique = true;
+		
 		int basedRow = blockBase.getRow();
 		int basedCol = blockBase.getColumn();
+		
+		basedRow = basedRow - basedRow % 3;
+		basedRow = basedCol - basedCol % 3;
 		
 		for (int i = basedRow; i < basedRow+3; i++)
 			for (int j = basedCol; j < basedCol+3; i++)
