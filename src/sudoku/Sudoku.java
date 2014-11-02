@@ -6,7 +6,7 @@ public class Sudoku
 
 	public static void main(String[] args) 
 	{
-		System.out.print("WASSSSUUUUPPPP");
+		PuzzlePanel frame = new PuzzlePanel();
+		frame.setVisible(true);
 	}
-
 }

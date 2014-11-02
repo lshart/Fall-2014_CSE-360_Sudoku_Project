@@ -9,8 +9,8 @@ public class BoardManager
 	private int hints;
 	private int time;			// in seconds
 	private int parTime;		// in seconds
-	private int currentNum;
-	private boolean overTime;
+	private int currentNum;		// This represents the number the user is trying to input
+	private boolean overTime;	// If true this means the user has gone over par time
 	private User currentUser;
 	
 	public BoardManager(int diff, User currU)
