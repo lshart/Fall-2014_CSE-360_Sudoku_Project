@@ -60,7 +60,7 @@ public class PuzzlePanel extends JFrame {
 		btnNewButton_2.setBounds(369, 105, 55, 23);
 		contentPane.add(btnNewButton_2);
 		
-		table = new JTable();
+	//	table = new JTable();
 		Border lineBorder = new LineBorder(Color.BLACK,2);
 		JPanel table2 = new JPanel(new GridLayout(3,3));
 		table2.setBorder(lineBorder);
