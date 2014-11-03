@@ -4,10 +4,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>336</x>
-      <y>343</y>
+      <x>287</x>
+      <y>287</y>
       <w>259</w>
-      <h>252</h>
+      <h>266</h>
     </coordinates>
     <panel_attributes>BoardManager
 --
@@ -22,25 +22,26 @@
 --
 +BoardManager(difficulty: int, currentUser: User)
 +placeNum (row: int, col: int, numToPlace: int):	boolean
++getCellValueAt(row: int, col: int):					int
 +removeNum (row: int, col: int): 						boolean
 +useHint():														boolean
 +getHints():													int
-+updateTime():													boolean
-+getParTime():													int
-+getTime():														int
-+setCurrentNum(newNum: int):								void
-+getCurrentNum():												int
++getDifficulty():												int
 +getCurrentUser():											User
-+getCellValueAt(row: int, col: int):					int</panel_attributes>
++getCurrentNum():												int
++setCurrentNum(newNum: int):								void
++getTime():														int
++getParTime():													int
++updateTime():													boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>889</x>
-      <y>343</y>
+      <x>840</x>
+      <y>280</y>
       <w>259</w>
-      <h>196</h>
+      <h>203</h>
     </coordinates>
     <panel_attributes>Cell
 --
@@ -59,25 +60,26 @@
 +removeValue():		boolean
 +getAnswer():			int
 +isClue():				boolean
-+makeAHint():			boolean</panel_attributes>
++makeAHint():			boolean
++solveCell():			void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>868</x>
-      <y>336</y>
+      <x>819</x>
+      <y>273</y>
       <w>35</w>
-      <h>42</h>
+      <h>49</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;30.0;10.0</additional_attributes>
+    <additional_attributes>10.0;50.0;30.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>56</x>
-      <y>371</y>
+      <x>7</x>
+      <y>315</y>
       <w>252</w>
       <h>161</h>
     </coordinates>
@@ -102,8 +104,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>301</x>
-      <y>364</y>
+      <x>252</x>
+      <y>308</y>
       <w>49</w>
       <h>84</h>
     </coordinates>
@@ -113,8 +115,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>161</y>
+      <x>21</x>
+      <y>105</y>
       <w>252</w>
       <h>203</h>
     </coordinates>
@@ -145,8 +147,8 @@ innerclass}</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>49</x>
-      <y>189</y>
+      <x>0</x>
+      <y>133</y>
       <w>35</w>
       <h>196</h>
     </coordinates>
@@ -156,8 +158,8 @@ innerclass}</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>602</x>
-      <y>546</y>
+      <x>553</x>
+      <y>490</y>
       <w>399</w>
       <h>63</h>
     </coordinates>
@@ -172,8 +174,8 @@ here's some useful links about designing a gui</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>336</x>
-      <y>84</y>
+      <x>287</x>
+      <y>28</y>
       <w>252</w>
       <h>252</h>
     </coordinates>
@@ -205,8 +207,8 @@ storeUserList()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>595</x>
-      <y>56</y>
+      <x>546</x>
+      <y>0</y>
       <w>329</w>
       <h>273</h>
     </coordinates>
@@ -240,8 +242,8 @@ Board Manager</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>70</y>
+      <x>21</x>
+      <y>14</y>
       <w>252</w>
       <h>84</h>
     </coordinates>
@@ -258,8 +260,8 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>315</x>
-      <y>105</y>
+      <x>266</x>
+      <y>49</y>
       <w>35</w>
       <h>70</h>
     </coordinates>
@@ -269,8 +271,8 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>588</x>
-      <y>322</y>
+      <x>539</x>
+      <y>266</y>
       <w>56</w>
       <h>35</h>
     </coordinates>
@@ -280,8 +282,8 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>175</x>
-      <y>147</y>
+      <x>126</x>
+      <y>91</y>
       <w>28</w>
       <h>28</h>
     </coordinates>
@@ -291,8 +293,8 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>315</x>
-      <y>63</y>
+      <x>266</x>
+      <y>7</y>
       <w>35</w>
       <h>35</h>
     </coordinates>
@@ -302,8 +304,8 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>315</x>
-      <y>63</y>
+      <x>266</x>
+      <y>7</y>
       <w>294</w>
       <h>21</h>
     </coordinates>
@@ -313,8 +315,8 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
-      <y>343</y>
+      <x>567</x>
+      <y>287</y>
       <w>259</w>
       <h>154</h>
     </coordinates>
@@ -322,12 +324,12 @@ gives focus to UserPanel</panel_attributes>
 --
 -board:			Cell[9][9]
 --
-+Board(difficulty: int, currentUser: User)
-+placeNum (row: int, col: int, numToPlace: int):	boolean
-+removeNum (row: int, col: int): 						boolean
-+randomReveal():												boolean
++Board(difficulty: int)
++placeValue (row: int, col: int, numToPlace: int):	boolean
++removeCellValue (row: int, col: int): 				boolean
 +getCellValue(row: int, col:int):						int
 +solveBoard()													void
++revealRandomCell():											boolean
 -checkPlace(row: int, col: int, numToCheck: int):	boolean
 -colCheck(col: int, numToCheck: int):					boolean
 -rowCheck(row: int, numToCheck: int):					boolean
@@ -337,8 +339,8 @@ gives focus to UserPanel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>588</x>
-      <y>336</y>
+      <x>539</x>
+      <y>280</y>
       <w>42</w>
       <h>42</h>
     </coordinates>

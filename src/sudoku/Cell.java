@@ -4,19 +4,14 @@ public class Cell
 {
 	private int row;
 	private int column;
-	private Cell block;
 	private int value;
 	private int answer;
 	private boolean isClue;
 	
-	public Cell (int ro, int col, Cell blo, int ans, boolean clue)
+	public Cell (int ro, int col, int ans, boolean clue)
 	{
 		row = ro;
 		column = col;
-		if (blo == null)
-			block = this;
-		else
-			block = blo;
 		answer = ans;
 		isClue = clue;
 		if (clue)
@@ -45,11 +40,6 @@ public class Cell
 		return column;
 	}
 	
-	public Cell getBlock()
-	{
-		return block;
-	}
-	
 	public int getValue()
 	{
 		return value;
@@ -68,7 +58,7 @@ public class Cell
 	
 	public boolean removeValue()
 	{
-		if (value == 0 && !isClue)
+		if (value == 0 || isClue)
 			return false;
 		else
 		{	
@@ -97,5 +87,10 @@ public class Cell
 			isClue = true;
 			return true;
 		}
+	}
+	
+	public void solveCell()
+	{
+		value = answer;
 	}
 }
