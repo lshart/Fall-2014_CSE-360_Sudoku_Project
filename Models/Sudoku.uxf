@@ -4,14 +4,14 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>588</x>
-      <y>357</y>
+      <x>336</x>
+      <y>343</y>
       <w>259</w>
-      <h>287</h>
+      <h>252</h>
     </coordinates>
     <panel_attributes>BoardManager
 --
--board:			Cell[9][9]
+-board:			Board
 -difficulty:	int
 -hints:			int
 -time:			int
@@ -29,36 +29,31 @@
 +getParTime():													int
 +getTime():														int
 +setCurrentNum(newNum: int):								void
-+getCurrentNum();												int
++getCurrentNum():												int
 +getCurrentUser():											User
--checkPlace(row: int, col: int, numToCheck: int):	boolean
--colCheck(col: int, numToCheck: int):					boolean
--rowCheck(row: int, numToCheck: int):					boolean
--blockCheck(blockBase: Cell, numToCheck: int):				boolean</panel_attributes>
++getCellValueAt(row: int, col: int):					int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>868</x>
-      <y>378</y>
+      <x>889</x>
+      <y>343</y>
       <w>259</w>
-      <h>217</h>
+      <h>196</h>
     </coordinates>
     <panel_attributes>Cell
 --
 -row:		int
 -column:	int
--block:	Cell
 -value:	int
 -answer:	int
 -isClue:	boolean
 --
-+Cell(row:int, col:int, block:Cell, answer:int, clue:boolean)
++Cell(row:int, col:int, answer:int, clue:boolean)
 +toString():			String
 +getRow():				int
 +getColumn():			int
-+getBlock():			Cell
 +getValue():			int
 +setValue(int val):	boolean
 +removeValue():		boolean
@@ -70,21 +65,21 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>840</x>
-      <y>371</y>
-      <w>42</w>
-      <h>21</h>
+      <x>868</x>
+      <y>336</y>
+      <w>35</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
+    <additional_attributes>10.0;40.0;30.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>308</x>
-      <y>357</y>
+      <x>56</x>
+      <y>371</y>
       <w>252</w>
-      <h>168</h>
+      <h>161</h>
     </coordinates>
     <panel_attributes>User
 {Serializable}
@@ -107,19 +102,19 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>553</x>
-      <y>350</y>
+      <x>301</x>
+      <y>364</y>
       <w>49</w>
-      <h>126</h>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>50.0;160.0;10.0;10.0</additional_attributes>
+    <additional_attributes>50.0;100.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>21</x>
-      <y>336</y>
+      <x>70</x>
+      <y>161</y>
       <w>252</w>
       <h>203</h>
     </coordinates>
@@ -150,19 +145,19 @@ innerclass}</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>266</x>
-      <y>350</y>
-      <w>56</w>
-      <h>21</h>
+      <x>49</x>
+      <y>189</y>
+      <w>35</w>
+      <h>196</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+    <additional_attributes>30.0;10.0;10.0;260.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>182</x>
-      <y>560</y>
+      <x>602</x>
+      <y>546</y>
       <w>399</w>
       <h>63</h>
     </coordinates>
@@ -177,8 +172,8 @@ here's some useful links about designing a gui</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>308</x>
-      <y>91</y>
+      <x>336</x>
+      <y>84</y>
       <w>252</w>
       <h>252</h>
     </coordinates>
@@ -211,9 +206,9 @@ storeUserList()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>595</x>
-      <y>77</y>
+      <y>56</y>
       <w>329</w>
-      <h>259</h>
+      <h>273</h>
     </coordinates>
     <panel_attributes>PuzzlePanel
 --
@@ -238,80 +233,116 @@ BoardManager to updateTime()
 
 A lable that displays messages, and lasts a few seconds.
 
-A quit game button, that returns to the UserPanel</panel_attributes>
+A quit game button, that returns to the UserPanel and closes out
+Board Manager</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>28</x>
-      <y>77</y>
+      <x>70</x>
+      <y>70</y>
       <w>252</w>
       <h>84</h>
     </coordinates>
-    <panel_attributes>main
+    <panel_attributes>Sudoku
 --
 --
+main(): void
+
 creates the UserManager, and has it load a specified file,
-
 creates UserPanel and PuzzlePanel
-
 gives focus to UserPanel</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>266</x>
-      <y>329</y>
-      <w>56</w>
-      <h>21</h>
+      <x>315</x>
+      <y>105</y>
+      <w>35</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>30.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>672</x>
-      <y>329</y>
-      <w>21</w>
+      <x>588</x>
+      <y>322</y>
+      <w>56</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>175</x>
+      <y>147</y>
+      <w>28</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>20.0;20.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>315</x>
+      <y>63</y>
+      <w>35</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>315</x>
+      <y>63</y>
+      <w>294</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>400.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>616</x>
+      <y>343</y>
+      <w>259</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>Board
+--
+-board:			Cell[9][9]
+--
++Board(difficulty: int, currentUser: User)
++placeNum (row: int, col: int, numToPlace: int):	boolean
++removeNum (row: int, col: int): 						boolean
++randomReveal():												boolean
++getCellValue(row: int, col:int):						int
++solveBoard()													void
+-checkPlace(row: int, col: int, numToCheck: int):	boolean
+-colCheck(col: int, numToCheck: int):					boolean
+-rowCheck(row: int, numToCheck: int):					boolean
+-blockCheck(blockBase: Cell, numToCheck: int):		boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>588</x>
+      <y>336</y>
+      <w>42</w>
       <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>133</x>
-      <y>154</y>
-      <w>21</w>
-      <h>196</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;260.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>273</x>
-      <y>154</y>
-      <w>49</w>
-      <h>21</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>273</x>
-      <y>70</y>
-      <w>336</w>
-      <h>21</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>460.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;40.0;40.0;10.0</additional_attributes>
   </element>
 </diagram>
