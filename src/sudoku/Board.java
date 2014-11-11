@@ -1,5 +1,8 @@
 package sudoku;
 
+import java.io.*;
+import java.util.ArrayList;
+
 public class Board 
 {
 	private static final int SIZE = 9;
@@ -56,6 +59,7 @@ public class Board
 		//////////////////////////////////////////////////////////////////////////////
 		int count = 0; // a temporary count, used to assign the answers to the cells, as well as their clue status
 		for (int i = 0; i < SIZE; i++)
+		{
 			for (int k = 0; k < SIZE; k++)
 			{  // I actually just realized we don't need to have any reference to the base cell.  It's really easy to figure out from row and column
 				if (i % 3 == 0 && k % 3 == 0)					// this if statement is for assigning the base block
@@ -64,6 +68,7 @@ public class Board
 					board[i][k] = new Cell(i, k, tempBoardAnswer[count], tempBoardClues[count]);
 				count ++;
 			}
+		}
 	}
 	
 	public boolean placeValue(int row, int col, int numToPlace)
@@ -97,6 +102,43 @@ public class Board
 	{
 		////////////////////  yeah, still not implemented
 		return true;
+	}
+	
+	private boolean loadPuzzle (String fileName) /////////////////////////////////////////////////////// I"M WORKING!!!
+	{
+		boolean loadedFile = false;
+		String answerKey, clueKey;
+		
+		try
+		{
+			FileReader fileIn = new FileReader(fileName);
+			BufferedReader in = new BufferedReader(fileIn);
+			
+			answerKey = in.readLine();
+			clueKey = in.readLine();
+	
+			in.close();
+			fileIn.close();
+			loadedFile = true;
+			
+		} catch(IOException i)
+		{
+			i.printStackTrace();
+		}
+		
+			
+		
+//		int count = 0; // a temporary count, used to assign the answers to the cells, as well as their clue status
+//		for (int i = 0; i < SIZE; i++)
+//		{
+//			for (int k = 0; k < SIZE; k++)
+//			{  // I actually just realized we don't need to have any reference to the base cell.  It's really easy to figure out from row and column		
+//				board[i][k] = new Cell(i, k, boardAnswer[count], boardClues[count]);
+//				count ++;
+//			}
+//		}
+		
+		return loadedFile;
 	}
 	
 	private boolean checkPlace(int row, int col, int numToCheck)
