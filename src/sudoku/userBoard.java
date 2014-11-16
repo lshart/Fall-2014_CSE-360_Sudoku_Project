@@ -1,6 +1,5 @@
 package sudoku;
 
-
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -63,7 +62,7 @@ public class userBoard extends JFrame {
 		btnEasy.addActionListener(new ActionListener() {// if button is pushed
 			public void actionPerformed(ActionEvent e)
 			{
-				PuzzleBoard panel =new PuzzleBoard();// get new puzzle board
+				PuzzlePanel panel =new PuzzlePanel();// get new puzzle board
 				panel.setVisible(true);
 				contentPane.setVisible(false);// destroy the old content pane
 				dispose();
@@ -76,7 +75,7 @@ public class userBoard extends JFrame {
 		btnMedium.addActionListener(new ActionListener() {// same as easy
 			public void actionPerformed(ActionEvent e)
 			{
-				PuzzleBoard panel =new PuzzleBoard();
+				PuzzlePanel panel =new PuzzlePanel();
 				panel.setVisible(true);
 				contentPane.setVisible(false);
 				dispose();
@@ -90,7 +89,7 @@ public class userBoard extends JFrame {
 		btnHard.addActionListener(new ActionListener() {// smae as easy
 			public void actionPerformed(ActionEvent e)
 			{
-				PuzzleBoard panel =new PuzzleBoard();
+				PuzzlePanel panel =new PuzzlePanel();
 				panel.setVisible(true);
 				contentPane.setVisible(false);
 				dispose();
@@ -104,7 +103,7 @@ public class userBoard extends JFrame {
 		btnEvil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				PuzzleBoard panel =new PuzzleBoard();
+				PuzzlePanel panel =new PuzzlePanel();
 				panel.setVisible(true);
 				contentPane.setVisible(false);
 				dispose();
@@ -119,7 +118,12 @@ public class userBoard extends JFrame {
 		btnCreateNewUser.addActionListener(new ActionListener() {// if create new is clicked 
 			public void actionPerformed(ActionEvent e)// add the new user info to user manager
 			{
-							}
+				if(textField.getText() != null && textField_1.getText() != null)
+				{
+					String name= textField.getText();
+					String pass = textField_1.getText();
+				}
+			}
 		});
 		
 		JLabel lblPassword = new JLabel("Password");// make a label for the password
