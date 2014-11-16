@@ -13,7 +13,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class userFame extends JFrame {
+public class userBoard extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -27,7 +27,7 @@ public class userFame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					userFame frame = new userFame();
+					userBoard frame = new userBoard();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class userFame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public userFame() {
+	public userBoard() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();// make a new panel
