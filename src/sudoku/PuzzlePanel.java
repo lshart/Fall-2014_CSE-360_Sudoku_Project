@@ -2,6 +2,7 @@ package sudoku;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -26,45 +27,37 @@ public class PuzzlePanel extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(30, 144, 255));
 		contentPane.setBorder(new EmptyBorder(9, 9, 9, 9));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Pencil");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		JButton btnPencil = new JButton("Pencil");
+		btnPencil.addActionListener(new ActionListener() {// if button is pushed
+			public void actionPerformed(ActionEvent e)
+			{
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 8));
-		btnNewButton.setBounds(246, 105, 53, 23);
-		contentPane.add(btnNewButton);
+		btnPencil.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		btnPencil.setBounds(264, 105, 68, 23);
+		contentPane.add(btnPencil);
 		
-		JButton btnNewButton_1 = new JButton("Paper");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		JButton btnEraser = new JButton("Eraser");
+		btnEraser.addActionListener(new ActionListener() {// if button is pushed
+			public void actionPerformed(ActionEvent e)
+			{
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 8));
-		btnNewButton_1.setBounds(306, 105, 53, 23);
-		contentPane.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("Eraser");
-		btnNewButton_2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 8));
-		btnNewButton_2.setBounds(369, 105, 55, 23);
-		contentPane.add(btnNewButton_2);
+		btnEraser.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		btnEraser.setBounds(342, 105, 68, 23);
+		contentPane.add(btnEraser);
 		
 	//	table = new JTable();
 		Border lineBorder = new LineBorder(Color.BLACK,2);
 		JPanel table2 = new JPanel(new GridLayout(3,3));
 		table2.setBorder(lineBorder);
 		JPanel table =  new JPanel(new GridLayout(3,3));
+		table.setBackground(Color.WHITE);
 		for (int k =0; k<9; k++)
 		{
 			table2 = new JPanel(new GridLayout(3,3));
@@ -80,9 +73,9 @@ public class PuzzlePanel extends JFrame {
 		
 		
 		JButton btnGetHint = new JButton("Get hint");
-		btnGetHint.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		btnGetHint.addActionListener(new ActionListener() {// if button is pushed
+			public void actionPerformed(ActionEvent e)
+			{
 			}
 		});
 		btnGetHint.setBounds(283, 194, 89, 23);
@@ -102,10 +95,10 @@ public class PuzzlePanel extends JFrame {
 		contentPane.add(textArea);
 		
 		JTextArea txtrScore = new JTextArea();
+		txtrScore.setBackground(new Color(30, 144, 255));
 		txtrScore.setText("Score:\r\nTime:"); //this is where you return score and time data
 		txtrScore.setBounds(20, 193, 101, 40);
 		contentPane.add(txtrScore);
 	}
 }
-	
 	
