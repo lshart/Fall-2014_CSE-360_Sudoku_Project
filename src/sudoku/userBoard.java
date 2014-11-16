@@ -1,4 +1,4 @@
-package PuzzlePanel;
+package sudoku;
 
 
 import java.awt.EventQueue;
