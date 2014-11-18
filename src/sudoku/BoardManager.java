@@ -1,5 +1,6 @@
 package sudoku;
 
+// This class is meant to manage the game board, though it relies on its components to handle much of the logic.
 public class BoardManager 
 {	
 	private Board board;		// This will be 9 by 9
@@ -92,5 +93,10 @@ public class BoardManager
 			overTime = true;
 		
 		return overTime;
+	}
+	
+	public boolean hasWon()
+	{
+		return board.hasWon();
 	}
 }

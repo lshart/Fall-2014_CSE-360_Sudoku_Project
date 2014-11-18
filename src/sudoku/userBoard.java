@@ -1,6 +1,5 @@
 package sudoku;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -14,31 +13,21 @@ import java.awt.event.*;
 
 public class userBoard extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5802065054242533217L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+	private UserManager thisManager;
 	JButton btnHard, btnEasy, btnEvil, btnMedium, btnCreateNewUser; 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					userBoard frame = new userBoard();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public userBoard() {
+	public userBoard(UserManager thisM) {
+		thisManager = thisM;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();// make a new panel
@@ -122,6 +111,7 @@ public class userBoard extends JFrame {
 				{
 					String name= textField.getText();
 					String pass = textField_1.getText();
+					thisManager.addUser(name, pass);
 				}
 			}
 		});

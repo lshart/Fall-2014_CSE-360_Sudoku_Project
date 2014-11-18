@@ -93,4 +93,12 @@ public class Cell
 	{
 		value = answer;
 	}
+	
+	public boolean isCorrect()
+	{
+		if (answer == value)
+			return true;
+		else
+			return false;
+	}
 }

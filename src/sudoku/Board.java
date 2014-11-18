@@ -1,7 +1,8 @@
 package sudoku;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.nio.charset.Charset;
+import java.util.Scanner;
 
 public class Board 
 {
@@ -11,63 +12,22 @@ public class Board
 	
 	public Board(int difficulty)
 	{
-		// this is the temporary board /////////////////////////////////////////////////////////////
-		int[] tempBoardAnswer = {2,3,9, 6,5,7, 8,4,1,
-								 7,1,4, 8,2,3, 9,6,5,
-								 5,6,8, 4,9,1, 3,2,7,
-								 
-								 4,8,5, 9,7,6, 1,3,2,
-								 6,9,2, 3,1,8, 7,5,4,
-								 1,7,3, 5,4,2, 6,8,9,
-								 
-								 8,4,1, 2,3,9, 5,7,6,
-								 9,2,6, 7,8,5, 4,1,3,
-								 3,5,7, 1,6,4, 2,9,8};
-		
-		boolean[] tempBoardClues = new boolean[81];
-		for (int m = 0; m < 81; m++)
-			tempBoardClues[m] = false;
-		tempBoardClues[1] = true;
-		tempBoardClues[5] = true;
-		tempBoardClues[10] = true;
-		tempBoardClues[11] = true;
-		tempBoardClues[12] = true;
-		tempBoardClues[19] = true;
-		tempBoardClues[20] = true;
-		tempBoardClues[22] = true;
-		tempBoardClues[23] = true;
-		tempBoardClues[26] = true;
-		tempBoardClues[32] = true;
-		tempBoardClues[33] = true;
-		tempBoardClues[38] = true;
-		tempBoardClues[39] = true;
-		tempBoardClues[40] = true;
-		tempBoardClues[41] = true;
-		tempBoardClues[42] = true;
-		tempBoardClues[47] = true;
-		tempBoardClues[48] = true;
-		tempBoardClues[54] = true;
-		tempBoardClues[57] = true;
-		tempBoardClues[58] = true;
-		tempBoardClues[60] = true;
-		tempBoardClues[61] = true;
-		tempBoardClues[68] = true;
-		tempBoardClues[69] = true;
-		tempBoardClues[70] = true;
-		tempBoardClues[75] = true;
-		tempBoardClues[79] = true;	
-		//////////////////////////////////////////////////////////////////////////////
-		int count = 0; // a temporary count, used to assign the answers to the cells, as well as their clue status
-		for (int i = 0; i < SIZE; i++)
+		switch (difficulty)
 		{
-			for (int k = 0; k < SIZE; k++)
-			{  // I actually just realized we don't need to have any reference to the base cell.  It's really easy to figure out from row and column
-				if (i % 3 == 0 && k % 3 == 0)					// this if statement is for assigning the base block
-					board[i][k] = new Cell(i, k, tempBoardAnswer[count], tempBoardClues[count]);
-				else
-					board[i][k] = new Cell(i, k, tempBoardAnswer[count], tempBoardClues[count]);
-				count ++;
-			}
+		case 0:
+			loadPuzzle("/Puzzles/Easy1.dat");
+			break;
+		case 1:
+			loadPuzzle("/Puzzles/Easy1.dat"); //
+			break;
+		case 2:
+			loadPuzzle("/Puzzles/Easy1.dat"); // UNTIL SUCH TIME AS I (or someone) MAKES 2 MORE PUZZLES
+			break;
+		case 3:
+			loadPuzzle("/Puzzles/Evil1.dat");
+			break;
+		default:
+			loadPuzzle("/Puzzles/Easy1.dat");
 		}
 	}
 	
@@ -104,10 +64,24 @@ public class Board
 		return true;
 	}
 	
+	public boolean hasWon()
+	{
+		boolean won = true;
+		
+		for (int r = 0; r < SIZE; r++)
+			for (int c = 0; c < SIZE; c++)
+				if (!board[r][c].isCorrect())
+					won = false;
+		
+		return won;
+	}
+	
 	private boolean loadPuzzle (String fileName) /////////////////////////////////////////////////////// I"M WORKING!!!
 	{
 		boolean loadedFile = false;
 		String answerKey, clueKey;
+		int[] boardAnswer = new int[SIZE];
+		boolean[] boardClues = new boolean[SIZE];
 		
 		try
 		{
@@ -116,7 +90,30 @@ public class Board
 			
 			answerKey = in.readLine();
 			clueKey = in.readLine();
-	
+			
+			InputStream answers = new ByteArrayInputStream(answerKey.getBytes(Charset.defaultCharset()));
+			InputStream clues = new ByteArrayInputStream(clueKey.getBytes(Charset.defaultCharset()));
+			
+			Scanner reader = new Scanner(answers);
+			
+			for (int i = 0; i < SIZE; i++)
+				boardAnswer[i] = reader.nextInt();
+			
+			reader.close();
+			reader = new Scanner(clues);
+			
+			for (int i = 0; i < SIZE; i++)
+			{
+				if (reader.nextInt() == 0)
+					boardClues[i] = false;
+				else
+					boardClues[i] = true;
+			}
+			
+			
+			reader.close();
+			clues.close();
+			answers.close();
 			in.close();
 			fileIn.close();
 			loadedFile = true;
@@ -126,17 +123,16 @@ public class Board
 			i.printStackTrace();
 		}
 		
-			
-		
-//		int count = 0; // a temporary count, used to assign the answers to the cells, as well as their clue status
-//		for (int i = 0; i < SIZE; i++)
-//		{
-//			for (int k = 0; k < SIZE; k++)
-//			{  // I actually just realized we don't need to have any reference to the base cell.  It's really easy to figure out from row and column		
-//				board[i][k] = new Cell(i, k, boardAnswer[count], boardClues[count]);
-//				count ++;
-//			}
-//		}
+	
+		int count = 0; // a temporary count, used to assign the answers to the cells, as well as their clue status
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int k = 0; k < SIZE; k++)
+			{		
+				board[i][k] = new Cell(i, k, boardAnswer[count], boardClues[count]);
+				count ++;
+			}
+		}
 		
 		return loadedFile;
 	}
