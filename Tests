@@ -14,7 +14,20 @@ board tests
     10 loadPuzzle (input file with incorrect puzzle -> False) failed
     11 board(input int for difficulty {2} -> board) passed
     
+    TO BE COMPLETED WHEN FILE IS COMPLETED
+    
     
 board manager tests
+  to be completed when file is completed, most methods are just new versions of board.
   
+  
+ cell tests
+      1 cell(input row; collumn; ans  int, boolean fales -> cell) passed
+      2 solveCell(single use toggle on empty cell) passed
+      3 isCorrect(input incorrect cell -> false) failed
+      4 isCorrect(input correct cell -> True) Passed
+      5 getAnswer(input cell with data -> int) passed
+      6
+  
+ 
   
