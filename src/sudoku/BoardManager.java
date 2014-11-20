@@ -24,9 +24,9 @@ public class BoardManager
 		currentNum = 0;
 	}
 	
-	public boolean placeNum(int row, int col, int numToPlace)
+	public boolean placeNum(int row, int col)
 	{
-		return board.placeValue(row, col, numToPlace);
+		return board.placeValue(row, col, currentNum);
 	}
 	
 	public int getCellValueAt(int row, int col)

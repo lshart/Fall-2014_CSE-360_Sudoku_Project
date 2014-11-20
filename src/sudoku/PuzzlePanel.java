@@ -64,7 +64,10 @@ public class PuzzlePanel extends JFrame {
 
 			table2.setBorder(lineBorder);
 			for(int i =0; i <=8; i++){
-				table2.add(new JTextField(1));
+				JLabel temp = new JLabel();
+				temp.setText("  1");
+				temp.setBorder(lineBorder);
+				table2.add(temp);
 			}
 			for(int i = 0; i <=8; i++){
 				table.add(table2);
@@ -83,16 +86,18 @@ public class PuzzlePanel extends JFrame {
 		table.setBounds(10, 24, 214, 144);
 		contentPane.add(table);
 		
-		JTextArea textArea = new JTextArea();
+		//JTextArea textArea = new JTextArea();
+		JLabel inputLabel = new JLabel(); 
+		inputLabel.setText("Pencil: 1");
 		
-		textArea.addInputMethodListener(new InputMethodListener() {
-			public void caretPositionChanged(InputMethodEvent arg0) {
-			}
-			public void inputMethodTextChanged(InputMethodEvent arg0) {
-			}
-		});
-		textArea.setBounds(283, 150, 81, 22);
-		contentPane.add(textArea);
+	//	textArea.addInputMethodListener(new InputMethodListener() {
+	//		public void caretPositionChanged(InputMethodEvent arg0) {
+	//		}
+		//	public void inputMethodTextChanged(InputMethodEvent arg0) {
+		//	}
+	//	});
+		inputLabel.setBounds(283, 150, 81, 22);
+		contentPane.add(inputLabel);
 		
 		JTextArea txtrScore = new JTextArea();
 		txtrScore.setBackground(new Color(30, 144, 255));

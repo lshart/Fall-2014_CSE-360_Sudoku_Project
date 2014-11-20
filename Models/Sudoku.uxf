@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="13.0">
+<diagram program="umlet" version="13.1">
   <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>287</x>
-      <y>301</y>
+      <y>357</y>
       <w>259</w>
-      <h>266</h>
+      <h>273</h>
     </coordinates>
     <panel_attributes>BoardManager
 --
@@ -21,10 +21,10 @@
 -currentNum:	int
 --
 +BoardManager(difficulty: int, currentUser: User)
-+placeNum (row: int, col: int, numToPlace: int):	boolean
++placeNum (row: int, col: int):							boolean
 +getCellValueAt(row: int, col: int):					int
 +removeNum (row: int, col: int): 						boolean
-+useHint():														boolean
++useHint():														int
 +getHints():													int
 +getDifficulty():												int
 +getCurrentUser():											User
@@ -32,14 +32,15 @@
 +setCurrentNum(newNum: int):								void
 +getTime():														int
 +getParTime():													int
-+updateTime():													boolean</panel_attributes>
++updateTime():													boolean
++hasWon():														boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>840</x>
-      <y>294</y>
+      <y>350</y>
       <w>259</w>
       <h>203</h>
     </coordinates>
@@ -61,14 +62,15 @@
 +getAnswer():			int
 +isClue():				boolean
 +makeAHint():			boolean
-+solveCell():			void</panel_attributes>
++solveCell():			void
++isCorrect():			boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>819</x>
-      <y>287</y>
+      <y>343</y>
       <w>35</w>
       <h>49</h>
     </coordinates>
@@ -79,7 +81,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>7</x>
-      <y>329</y>
+      <y>385</y>
       <w>252</w>
       <h>161</h>
     </coordinates>
@@ -105,7 +107,7 @@
     <id>Relation</id>
     <coordinates>
       <x>252</x>
-      <y>322</y>
+      <y>378</y>
       <w>49</w>
       <h>84</h>
     </coordinates>
@@ -116,7 +118,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>21</x>
-      <y>119</y>
+      <y>175</y>
       <w>252</w>
       <h>203</h>
     </coordinates>
@@ -148,7 +150,7 @@ innerclass}</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>0</x>
-      <y>147</y>
+      <y>203</y>
       <w>35</w>
       <h>196</h>
     </coordinates>
@@ -159,7 +161,7 @@ innerclass}</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>553</x>
-      <y>504</y>
+      <y>560</y>
       <w>399</w>
       <h>63</h>
     </coordinates>
@@ -175,7 +177,7 @@ here's some useful links about designing a gui</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>287</x>
-      <y>42</y>
+      <y>98</y>
       <w>252</w>
       <h>252</h>
     </coordinates>
@@ -208,7 +210,7 @@ storeUserList()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>546</x>
-      <y>14</y>
+      <y>70</y>
       <w>329</w>
       <h>273</h>
     </coordinates>
@@ -243,7 +245,7 @@ Board Manager</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>21</x>
-      <y>28</y>
+      <y>84</y>
       <w>252</w>
       <h>84</h>
     </coordinates>
@@ -261,7 +263,7 @@ gives focus to UserPanel</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>266</x>
-      <y>63</y>
+      <y>119</y>
       <w>35</w>
       <h>70</h>
     </coordinates>
@@ -272,7 +274,7 @@ gives focus to UserPanel</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>539</x>
-      <y>280</y>
+      <y>336</y>
       <w>56</w>
       <h>35</h>
     </coordinates>
@@ -283,7 +285,7 @@ gives focus to UserPanel</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>126</x>
-      <y>105</y>
+      <y>161</y>
       <w>28</w>
       <h>28</h>
     </coordinates>
@@ -294,7 +296,7 @@ gives focus to UserPanel</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>266</x>
-      <y>21</y>
+      <y>77</y>
       <w>35</w>
       <h>35</h>
     </coordinates>
@@ -305,7 +307,7 @@ gives focus to UserPanel</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>266</x>
-      <y>21</y>
+      <y>77</y>
       <w>294</w>
       <h>21</h>
     </coordinates>
@@ -316,9 +318,9 @@ gives focus to UserPanel</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>567</x>
-      <y>301</y>
+      <y>357</y>
       <w>259</w>
-      <h>168</h>
+      <h>175</h>
     </coordinates>
     <panel_attributes>Board
 --
@@ -329,7 +331,8 @@ gives focus to UserPanel</panel_attributes>
 +removeCellValue (row: int, col: int): 				boolean
 +getCellValue(row: int, col:int):						int
 +solveBoard():													void
-+revealRandomCell():											boolean
++clearBadCells():												int
++hasWon():														boolean
 -loadPuzzle(fileName: string):							boolean
 -checkPlace(row: int, col: int, numToCheck: int):	boolean
 -colCheck(col: int, numToCheck: int):					boolean
@@ -341,7 +344,7 @@ gives focus to UserPanel</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>539</x>
-      <y>294</y>
+      <y>350</y>
       <w>42</w>
       <h>42</h>
     </coordinates>
