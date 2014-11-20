@@ -8,7 +8,7 @@ public class Sudoku
 	{
 		UserManager thisM = new UserManager();
 		BoardManager blaj = new BoardManager(0, null);
-		blaj.placeNum(2, 4, 8);
+		blaj.placeNum(2, 4);
 		userBoard frame = new userBoard(thisM);
 		frame.setVisible(true);
 	}
