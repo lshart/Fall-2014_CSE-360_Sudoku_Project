@@ -1,0 +1,20 @@
+board tests
+
+      dependency = cells [][]
+    1 rowcheck (input: row with unique integers + 1 double -> false) Failed
+    2 rowcheck (input: row with unique integers + 1 unique int to check -> true) passed
+    3 colcheck (input: collumn with unique integers + 1 double -> false) Failed
+    4 colcheck (input: collumn with unique integers + 1 unique int to check -> true) passed
+    5 blockcheck (input: row with unique integers + column with unique integers + 1 double -> false) Failed
+    6 blockcheck (input: row with unique integers + column with unique integers + 1 unique int to check -> true) passed 
+          should blockCheck have a check to see if the integers are null?
+    7 checkPlace (input row + collumn both unique + 1 non unique int -> flase) failed
+    8 checkPlace (input row + collumn both unique + 1 unique int -> True) passed
+    9 loadPuzzle (input file with correct puzzle -> True) passed
+    10 loadPuzzle (input file with incorrect puzzle -> False) failed
+    11 board(input int for difficulty {2} -> board) passed
+    
+    
+board manager tests
+  
+  
