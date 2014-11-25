@@ -58,10 +58,19 @@ public class Board
 				board[i][j].solveCell();
 	}
 	
-	public boolean revealRandomCell()
+	public int clearBadCells()
 	{
-		////////////////////  yeah, still not implemented
-		return true;
+		int clearedCells = 0;
+		
+		for (int r = 0; r < SIZE; r++)
+			for (int c = 0; c < SIZE; c++)
+				if (!board[r][c].isCorrect())
+				{
+					board[r][c].removeValue();
+					clearedCells++;
+				}
+		
+		return clearedCells;
 	}
 	
 	public boolean hasWon()

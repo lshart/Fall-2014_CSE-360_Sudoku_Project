@@ -1,4 +1,4 @@
-package sodoku;
+package sudoku;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -6,7 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-public class PuzzleBoard extends JFrame {
+public class PuzzlePanel extends JFrame {
 
 	/**
 	 * 
@@ -25,7 +25,7 @@ public class PuzzleBoard extends JFrame {
 	 * Create the frame.
 	 */
 	 
-	public PuzzleBoard() {
+	public PuzzlePanel() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

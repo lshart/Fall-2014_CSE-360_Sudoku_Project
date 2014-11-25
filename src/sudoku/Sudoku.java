@@ -7,9 +7,7 @@ public class Sudoku
 	public static void main(String[] args) 
 	{
 		UserManager thisM = new UserManager();
-		BoardManager blaj = new BoardManager(0, null);
-		blaj.placeNum(2, 4);
-		userBoard frame = new userBoard(thisM);
+		userPanel frame = new userPanel(thisM);
 		frame.setVisible(true);
 	}
 }

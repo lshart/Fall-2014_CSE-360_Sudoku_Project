@@ -21,7 +21,7 @@ public class BoardManager
 		overTime = false;
 		time = 0;
 		parTime = 1200;
-		currentNum = 0;
+		currentNum = 1;
 	}
 	
 	public boolean placeNum(int row, int col)
@@ -39,15 +39,13 @@ public class BoardManager
 		return board.removeCellValue(row, col);
 	}
 	
-	public boolean useHint()
+	// A return of -1 means no hints remain
+	public int useHint()
 	{
-		if (board.revealRandomCell())
-		{
-			hints--;
-			return true;
-		}
+		if (hints > 0)
+			return board.clearBadCells();
 		else
-			return false;
+			return -1;
 	}
 	
 	public int getHints()

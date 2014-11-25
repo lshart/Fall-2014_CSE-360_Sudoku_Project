@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class userBoard extends JFrame {
+public class userPanel extends JFrame {
 
 	/**
 	 * 
@@ -21,13 +21,16 @@ public class userBoard extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private UserManager thisManager;
+	private boolean loggedIn;
 	JButton btnHard, btnEasy, btnEvil, btnMedium, btnCreateNewUser; 
 
 	/**
 	 * Create the frame.
 	 */
-	public userBoard(UserManager thisM) {
+	public userPanel(UserManager thisM) {
 		thisManager = thisM;
+		loggedIn= false;
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();// make a new panel
@@ -36,7 +39,7 @@ public class userBoard extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField = new JTextField();// new text fiels
+		textField = new JTextField();// new text fields
 		textField.setBounds(61, 177, 86, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
@@ -103,13 +106,15 @@ public class userBoard extends JFrame {
 		
 		JButton btnCreateNewUser = new JButton("Create new");
 		btnCreateNewUser.setBounds(50, 208, 113, 23);
-		btnCreateNewUser.addActionListener(new ActionListener() {// if create new is clicked 
+		btnCreateNewUser.addActionListener (new ActionListener() {// if create new is clicked 
 			public void actionPerformed(ActionEvent e)// add the new user info to user manager
 			{
-				    String u=userNameTxt.getText();
-			        String p=passwordTxt.getText();
+					String User = textField.getText();
+					String Password = textField_1.getText();
+		//		    String u = userNameTxt.getText();
+		//	        String p = passwordTxt.getText();
 			   //     thisManager.addUser(u, p);
-				if(u.equals("")||p.equals(""))
+				if(true)
 				{
 	
 					JFrame Messageframe =new JFrame();
@@ -130,20 +135,21 @@ public class userBoard extends JFrame {
 					btnOk.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e)
 						{
-							userBoard board =new userBoard();
+							userPanel board = new userPanel(thisManager);
 							board.setVisible(true);
 							
-							Messageframe.setVisible(false);
+						//	Messageframe.setVisible(false);
 							dispose();
 							
 						}
-					});
-				
+					}
+					);
 					
 				}
 						
 			}
 		});
+					
 		contentPane.add(btnCreateNewUser);
 		
 		JLabel lblPassword = new JLabel("Password");// make a label for the password
