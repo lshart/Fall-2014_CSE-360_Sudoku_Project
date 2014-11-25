@@ -103,18 +103,48 @@ public class userBoard extends JFrame {
 		
 		JButton btnCreateNewUser = new JButton("Create new");
 		btnCreateNewUser.setBounds(50, 208, 113, 23);
-		contentPane.add(btnCreateNewUser);
 		btnCreateNewUser.addActionListener(new ActionListener() {// if create new is clicked 
 			public void actionPerformed(ActionEvent e)// add the new user info to user manager
 			{
-				if(textField.getText() != null && textField_1.getText() != null)
+				    String u=userNameTxt.getText();
+			        String p=passwordTxt.getText();
+			   //     thisManager.addUser(u, p);
+				if(u.equals("")||p.equals(""))
 				{
-					String name= textField.getText();
-					String pass = textField_1.getText();
-					thisManager.addUser(name, pass);
+	
+					JFrame Messageframe =new JFrame();
+					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					setBounds(100, 100, 228, 139);
+					JPanel usernameWindow = new JPanel();
+					Messageframe.add(usernameWindow);
+					usernameWindow.setBorder(new EmptyBorder(5, 5, 5, 5));
+					setContentPane(usernameWindow);
+					usernameWindow.setLayout(null);
+					JLabel lblNewLabel = new JLabel("Please fill in all fields");
+					lblNewLabel.setBounds(53, 31, 134, 14);
+					usernameWindow.add(lblNewLabel);
+					JButton btnOk = new JButton("Ok");
+					btnOk.setBounds(67, 66, 89, 23);
+					usernameWindow.add(btnOk);
+					usernameWindow.setVisible(true);
+					btnOk.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e)
+						{
+							userBoard board =new userBoard();
+							board.setVisible(true);
+							
+							Messageframe.setVisible(false);
+							dispose();
+							
+						}
+					});
+				
+					
 				}
+						
 			}
 		});
+		contentPane.add(btnCreateNewUser);
 		
 		JLabel lblPassword = new JLabel("Password");// make a label for the password
 		lblPassword.setBackground(new Color(30, 144, 255));
