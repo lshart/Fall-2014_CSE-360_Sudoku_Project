@@ -1,4 +1,4 @@
-package sudoku;
+package sodoku;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -6,13 +6,15 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-public class PuzzlePanel extends JFrame {
+public class PuzzleBoard extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private BoardManager newManager;
+	
 	//private JTable table;  // why is this table here?
 
 	/**
@@ -23,7 +25,7 @@ public class PuzzlePanel extends JFrame {
 	 * Create the frame.
 	 */
 	 
-	public PuzzlePanel() {
+	public PuzzleBoard() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -65,6 +67,12 @@ public class PuzzlePanel extends JFrame {
 			table2.setBorder(lineBorder);
 			for(int i =0; i <=8; i++){
 				JLabel temp = new JLabel();
+				temp.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+
+					}
+				});
 				temp.setText("  1");
 				temp.setBorder(lineBorder);
 				table2.add(temp);
@@ -79,6 +87,7 @@ public class PuzzlePanel extends JFrame {
 		btnGetHint.addActionListener(new ActionListener() {// if button is pushed
 			public void actionPerformed(ActionEvent e)
 			{
+				newManager.getHints();
 			}
 		});
 		btnGetHint.setBounds(283, 194, 89, 23);
@@ -86,20 +95,19 @@ public class PuzzlePanel extends JFrame {
 		table.setBounds(10, 24, 214, 144);
 		contentPane.add(table);
 		
-		//JTextArea textArea = new JTextArea();
-		JLabel inputLabel = new JLabel(); 
-		inputLabel.setText("Pencil: 1");
+		JTextArea textArea = new JTextArea();
+		textArea.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+			}
+		});
 		
-	//	textArea.addInputMethodListener(new InputMethodListener() {
-	//		public void caretPositionChanged(InputMethodEvent arg0) {
-	//		}
-		//	public void inputMethodTextChanged(InputMethodEvent arg0) {
-		//	}
-	//	});
-		inputLabel.setBounds(283, 150, 81, 22);
-		contentPane.add(inputLabel);
+		
+		textArea.setBounds(283, 150, 81, 22);
+		contentPane.add(textArea);
 		
 		JTextArea txtrScore = new JTextArea();
+	
 		txtrScore.setBackground(new Color(30, 144, 255));
 		txtrScore.setText("Score:\r\nTime:"); //this is where you return score and time data
 		txtrScore.setBounds(20, 193, 101, 40);
