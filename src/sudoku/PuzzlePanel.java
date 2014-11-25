@@ -14,6 +14,8 @@ public class PuzzlePanel extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private BoardManager newManager;
+	private boolean pen;
+	private boolean erase;
 	
 	//private JTable table;  // why is this table here?
 
@@ -33,11 +35,16 @@ public class PuzzlePanel extends JFrame {
 		contentPane.setBorder(new EmptyBorder(9, 9, 9, 9));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		pen = false;
+		erase = false;
+		
 		
 		JButton btnPencil = new JButton("Pencil");
 		btnPencil.addActionListener(new ActionListener() {// if button is pushed
 			public void actionPerformed(ActionEvent e)
 			{
+				erase = false;
+				pen = true;
 			}
 		});
 		btnPencil.setFont(new Font("Tahoma", Font.PLAIN, 8));
@@ -48,6 +55,8 @@ public class PuzzlePanel extends JFrame {
 		btnEraser.addActionListener(new ActionListener() {// if button is pushed
 			public void actionPerformed(ActionEvent e)
 			{
+				erase = true;
+				pen = false;
 			}
 		});
 		btnEraser.setFont(new Font("Tahoma", Font.PLAIN, 8));
@@ -87,7 +96,7 @@ public class PuzzlePanel extends JFrame {
 		btnGetHint.addActionListener(new ActionListener() {// if button is pushed
 			public void actionPerformed(ActionEvent e)
 			{
-				newManager.getHints();
+				newManager.useHint();
 			}
 		});
 		btnGetHint.setBounds(283, 194, 89, 23);
