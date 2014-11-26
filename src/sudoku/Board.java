@@ -12,22 +12,24 @@ public class Board
 	
 	public Board(int difficulty)
 	{
+		board = new Cell[SIZE][SIZE];
+		
 		switch (difficulty)
 		{
 		case 0:
-			loadPuzzle("/Puzzles/Easy1.dat");
+			loadPuzzle("Puzzles\\Easy1.dat");
 			break;
 		case 1:
-			loadPuzzle("/Puzzles/Easy1.dat"); //
+			loadPuzzle("Puzzles\\Medium1.dat"); //
 			break;
 		case 2:
-			loadPuzzle("/Puzzles/Easy1.dat"); // UNTIL SUCH TIME AS I (or someone) MAKES 2 MORE PUZZLES
+			loadPuzzle("Puzzles\\Hard1.dat"); // UNTIL SUCH TIME AS I (or someone) MAKES 2 MORE PUZZLES
 			break;
 		case 3:
-			loadPuzzle("/Puzzles/Evil1.dat");
+			loadPuzzle("Puzzles\\Evil1.dat");
 			break;
 		default:
-			loadPuzzle("/Puzzles/Easy1.dat");
+			loadPuzzle("Puzzles\\Easy1.dat");
 		}
 	}
 	
@@ -53,9 +55,9 @@ public class Board
 	
 	public void solveBoard()
 	{
-		for (int i = 0; i < SIZE; i++)
-			for(int j = 0; j < SIZE; j++)
-				board[i][j].solveCell();
+		for (int r = 0; r < SIZE; r++)
+			for(int c = 0; c < SIZE; c++)
+				board[r][c].solveCell();
 	}
 	
 	public int clearBadCells()
@@ -85,12 +87,12 @@ public class Board
 		return won;
 	}
 	
-	private boolean loadPuzzle (String fileName) /////////////////////////////////////////////////////// I"M WORKING!!!
+	private boolean loadPuzzle (String fileName)
 	{
 		boolean loadedFile = false;
 		String answerKey, clueKey;
-		int[] boardAnswer = new int[SIZE];
-		boolean[] boardClues = new boolean[SIZE];
+		int[] boardAnswer = new int[SIZE*SIZE];
+		boolean[] boardClues = new boolean[SIZE*SIZE];
 		
 		try
 		{
@@ -105,13 +107,13 @@ public class Board
 			
 			Scanner reader = new Scanner(answers);
 			
-			for (int i = 0; i < SIZE; i++)
+			for (int i = 0; i < SIZE*SIZE; i++)
 				boardAnswer[i] = reader.nextInt();
 			
 			reader.close();
 			reader = new Scanner(clues);
 			
-			for (int i = 0; i < SIZE; i++)
+			for (int i = 0; i < SIZE*SIZE; i++)
 			{
 				if (reader.nextInt() == 0)
 					boardClues[i] = false;
@@ -119,30 +121,29 @@ public class Board
 					boardClues[i] = true;
 			}
 			
-			
 			reader.close();
 			clues.close();
 			answers.close();
 			in.close();
 			fileIn.close();
-			loadedFile = true;
-			
+			loadedFile = true;		
 		} catch(IOException i)
 		{
 			i.printStackTrace();
 		}
 		
-	
-		int count = 0; // a temporary count, used to assign the answers to the cells, as well as their clue status
-		for (int i = 0; i < SIZE; i++)
+		if (loadedFile)
 		{
-			for (int k = 0; k < SIZE; k++)
-			{		
-				board[i][k] = new Cell(i, k, boardAnswer[count], boardClues[count]);
-				count ++;
+			int count = 0; // a temporary count, used to assign the answers to the cells, as well as their clue status
+			for (int r = 0; r < SIZE; r++)
+			{
+				for (int c = 0; c < SIZE; c++)
+				{		
+					board[r][c] = new Cell(r, c, boardAnswer[count], boardClues[count]);
+					count ++;
+				}
 			}
 		}
-		
 		return loadedFile;
 	}
 	
@@ -185,13 +186,23 @@ public class Board
 		int checkedRow = cellToCheck.getRow();
 		int checkedCol = cellToCheck.getColumn();
 		
+		System.out.println(checkedRow + ", " + checkedCol + " ");
+		
 		checkedRow = checkedRow - checkedRow % 3;
 		checkedCol = checkedCol - checkedCol % 3;
 		
-		for (int i = checkedRow; i < checkedRow+3; i++)
-			for (int j = checkedCol; j < checkedCol+3; i++)
-				if (board[i][j].getValue() == numToCheck)
+		System.out.println(checkedRow + ", " + checkedCol + " ");
+		
+		for (int r = checkedRow; r < checkedRow+3; r++)
+		{
+			for (int c = checkedCol; c < checkedCol+3; c++)
+			{
+				System.out.print(r + ", " + c + " ");
+				if (board[r][c].getValue() == numToCheck)
 					unique = false;
+			}
+			System.out.println("");
+		}
 		
 		return unique;
 	}

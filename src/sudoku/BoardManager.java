@@ -87,7 +87,17 @@ public class BoardManager
 	{
 		time ++;
 		
-		if (time == parTime)
+		if (time >= parTime)
+			overTime = true;
+		
+		return overTime;
+	}
+	
+	public boolean updateTime(int penalty)
+	{
+		time += penalty;
+		
+		if (time >= parTime)
 			overTime = true;
 		
 		return overTime;

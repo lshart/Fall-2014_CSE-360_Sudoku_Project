@@ -14,7 +14,7 @@ public class Cell
 		column = col;
 		answer = ans;
 		isClue = clue;
-		if (clue)
+		if (isClue)
 			value = ans;
 		else
 			value = 0;

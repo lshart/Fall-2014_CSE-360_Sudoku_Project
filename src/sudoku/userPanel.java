@@ -11,11 +11,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class userPanel extends JFrame {
-
-	/**
-	 * 
-	 */
+public class userPanel extends JFrame 
+{
 	private static final long serialVersionUID = -5802065054242533217L;
 	private JPanel contentPane;
 	private JTextField textField;
@@ -54,7 +51,8 @@ public class userPanel extends JFrame {
 		btnEasy.addActionListener(new ActionListener() {// if button is pushed
 			public void actionPerformed(ActionEvent e)
 			{
-				PuzzlePanel panel =new PuzzlePanel();// get new puzzle board
+				BoardManager bMe = new BoardManager(0, thisManager.getSelectedUser());
+				PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
 				panel.setVisible(true);
 				contentPane.setVisible(false);// destroy the old content pane
 				dispose();
@@ -67,7 +65,8 @@ public class userPanel extends JFrame {
 		btnMedium.addActionListener(new ActionListener() {// same as easy
 			public void actionPerformed(ActionEvent e)
 			{
-				PuzzlePanel panel =new PuzzlePanel();
+				BoardManager bMe = new BoardManager(1, thisManager.getSelectedUser());
+				PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
 				panel.setVisible(true);
 				contentPane.setVisible(false);
 				dispose();
@@ -81,7 +80,8 @@ public class userPanel extends JFrame {
 		btnHard.addActionListener(new ActionListener() {// smae as easy
 			public void actionPerformed(ActionEvent e)
 			{
-				PuzzlePanel panel =new PuzzlePanel();
+				BoardManager bMe = new BoardManager(2, thisManager.getSelectedUser());
+				PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
 				panel.setVisible(true);
 				contentPane.setVisible(false);
 				dispose();
@@ -95,7 +95,8 @@ public class userPanel extends JFrame {
 		btnEvil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				PuzzlePanel panel =new PuzzlePanel();
+				BoardManager bMe = new BoardManager(3, thisManager.getSelectedUser());
+				PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
 				panel.setVisible(true);
 				contentPane.setVisible(false);
 				dispose();
