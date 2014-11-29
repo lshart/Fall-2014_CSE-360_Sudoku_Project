@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class userPanel extends JFrame 
+public class UserPanel extends JFrame 
 {
 	private static final long serialVersionUID = -5802065054242533217L;
 	private JPanel contentPane;
@@ -24,7 +24,7 @@ public class userPanel extends JFrame
 	/**
 	 * Create the frame.
 	 */
-	public userPanel(UserManager thisM) {
+	public UserPanel(UserManager thisM) {
 		thisManager = thisM;
 		loggedIn= false;
 
@@ -136,7 +136,7 @@ public class userPanel extends JFrame
 					btnOk.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e)
 						{
-							userPanel board = new userPanel(thisManager);
+							UserPanel board = new UserPanel(thisManager);
 							board.setVisible(true);
 							
 						//	Messageframe.setVisible(false);
