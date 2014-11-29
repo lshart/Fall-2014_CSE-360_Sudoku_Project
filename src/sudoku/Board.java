@@ -1,3 +1,7 @@
+/////////////
+// The Board Class keeps track of all the Cells in the board, as well as managing the delivery of
+// commands to all the Cells.
+/////////////
 package sudoku;
 
 import java.io.*;
@@ -33,6 +37,8 @@ public class Board
 		}
 	}
 	
+	// Places a value at the specified cell, so long as it's a valid place.  Returns false if
+	// it can't place the value. 
 	public boolean placeValue(int row, int col, int numToPlace)
 	{
 		if (checkPlace(row, col, numToPlace))
@@ -43,16 +49,20 @@ public class Board
 			return false;
 	}
 	
+	// Asks the Cell to attempt to remove a value from a cell.  If it is one of the clues, then
+	// it returns false.
 	public boolean removeCellValue(int row, int col)
 	{
 		return board[row][col].removeValue();
 	}
 	
+	// Returns the value of the cell at the specified location
 	public int getCellValue(int row, int col)
 	{
 		return board[row][col].getValue();
 	}
 	
+	// Sets every cell to be equal to their answer
 	public void solveBoard()
 	{
 		for (int r = 0; r < SIZE; r++)
@@ -60,6 +70,7 @@ public class Board
 				board[r][c].solveCell();
 	}
 	
+	// This runs through the board and clears every cell who's value doesn't match the solution
 	public int clearBadCells()
 	{
 		int clearedCells = 0;
@@ -75,6 +86,7 @@ public class Board
 		return clearedCells;
 	}
 	
+	// Checks to see if the board contains only solved cells
 	public boolean hasWon()
 	{
 		boolean won = true;
@@ -87,6 +99,7 @@ public class Board
 		return won;
 	}
 	
+	// Loads a puzzle from a file with the specified name
 	private boolean loadPuzzle (String fileName)
 	{
 		boolean loadedFile = false;
@@ -147,6 +160,7 @@ public class Board
 		return loadedFile;
 	}
 	
+	// Checks the to see if the specified number can be placed in the specified location
 	private boolean checkPlace(int row, int col, int numToCheck)
 	{
 		boolean unique = false;
@@ -157,28 +171,31 @@ public class Board
 		return unique;
 	}
 	
+	// Helps checkPlace
 	private boolean colCheck(int col, int numToCheck)
 	{
 		boolean unique = true;
 		for (int i = 0; i < SIZE; i ++)
 		{
-			if (board[col][i].getValue() == numToCheck)
+			if (board[i][col].getValue() == numToCheck)
 				unique = false;
 		}
 		return unique;
 	}
 	
+	// Helps checkPlace
 	private boolean rowCheck(int row, int numToCheck)
 	{
 		boolean unique = true;
 		for (int i = 0; i < SIZE; i ++)
 		{
-			if (board[i][row].getValue() == numToCheck)
+			if (board[row][i].getValue() == numToCheck)
 				unique = false;
 		}
 		return unique;
 	}
 	
+	// Helps checkPlace
 	private boolean blockCheck(Cell cellToCheck, int numToCheck)
 	{
 		boolean unique = true;
