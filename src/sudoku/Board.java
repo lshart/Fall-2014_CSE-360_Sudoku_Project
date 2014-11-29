@@ -17,19 +17,19 @@ public class Board
 		switch (difficulty)
 		{
 		case 0:
-			loadPuzzle("Puzzles\\Easy1.dat");
+			loadPuzzle("Puzzles/Easy1.dat");
 			break;
 		case 1:
-			loadPuzzle("Puzzles\\Medium1.dat"); //
+			loadPuzzle("Puzzles/Medium1.dat"); //
 			break;
 		case 2:
-			loadPuzzle("Puzzles\\Hard1.dat"); // UNTIL SUCH TIME AS I (or someone) MAKES 2 MORE PUZZLES
+			loadPuzzle("Puzzles/Hard1.dat"); // UNTIL SUCH TIME AS I (or someone) MAKES 2 MORE PUZZLES
 			break;
 		case 3:
-			loadPuzzle("Puzzles\\Evil1.dat");
+			loadPuzzle("Puzzles/Evil1.dat");
 			break;
 		default:
-			loadPuzzle("Puzzles\\Easy1.dat");
+			loadPuzzle("Puzzles/Easy1.dat");
 		}
 	}
 	
