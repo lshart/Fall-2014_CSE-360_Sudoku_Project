@@ -62,8 +62,10 @@ public class PuzzlePanel extends JFrame
 		btnGetHint.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnGetHint.setFocusable(false);
 		JButton btnEraser = new JButton("Eraser");
+		btnEraser.addActionListener (new eraseButton());
 		btnEraser.setFocusable(false);
 		JButton btnPencil = new JButton("Pencil");
+		btnPencil.addActionListener (new penButton());
 		btnPencil.setFocusable(false);
 
 		
@@ -244,8 +246,11 @@ public class PuzzlePanel extends JFrame
 			{
 				if(!newManager.placeNum(theRow, theCol))
 				{
-					messageLabel.setText("<html><div style=\"text-align: center;\">Cell is a<br> clue</html>");
+					messageLabel.setText("<html><div style=\"text-align: center;\">INVALID<br> MOVE</html>");
 				}
+				else
+					messageLabel.setText(null);
+					
 
 			}
 			updatePanel();		
@@ -292,6 +297,28 @@ public class PuzzlePanel extends JFrame
 				messageLabel.setText(message);
 			}
 		}
+	}
+	
+	private class penButton implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			pen = true;
+			erase = false;
+		}
+		
+	
+	}
+	
+	private class eraseButton implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			pen = false;
+			erase = true;
+		}
+		
+	
 	}
 	
 

@@ -214,7 +214,6 @@ public class Board
 				if (board[r][c].getValue() == numToCheck)
 					unique = false;
 			}
-			System.out.println("");
 		}
 		
 		return unique;

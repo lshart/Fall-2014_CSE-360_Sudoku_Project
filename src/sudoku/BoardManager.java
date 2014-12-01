@@ -21,7 +21,7 @@ public class BoardManager
 	public BoardManager(int diff, User currU)
 	{	
 		board = new Board(diff);
-		difficulty = diff;
+		difficulty = diff;   
 		currentUser = currU;
 		hints = 4;
 		overTime = false;
