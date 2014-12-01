@@ -92,6 +92,14 @@ public class PuzzlePanel extends JFrame
 		gbc_messageLabel.gridx = 0;
 		gbc_messageLabel.gridy = 1;
 		contentPane.add(messageLabel, gbc_messageLabel);
+		
+		JLabel userLabel = new JLabel("");
+		GridBagConstraints gbc_userLabel = new GridBagConstraints();
+		gbc_userLabel.anchor = GridBagConstraints.EAST;
+		gbc_userLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_userLabel.gridx = 4;
+		gbc_userLabel.gridy = 1;
+		contentPane.add(userLabel, gbc_userLabel);
 
 		btnPencil.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		GridBagConstraints gbc_btnPencil = new GridBagConstraints();

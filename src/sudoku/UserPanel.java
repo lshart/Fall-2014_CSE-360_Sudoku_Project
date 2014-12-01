@@ -15,8 +15,9 @@ public class UserPanel extends JFrame
 {
 	private static final long serialVersionUID = -5802065054242533217L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JLabel messageLable;
+	private JTextField passField;
+	private JTextField userField;
 	private UserManager thisManager;
 	private boolean loggedIn;
 	JButton btnHard, btnEasy, btnEvil, btnMedium, btnCreateNewUser; 
@@ -36,26 +37,29 @@ public class UserPanel extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField = new JTextField();// new text fields
-		textField.setBounds(61, 177, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		passField = new JTextField();// new text fields
+		passField.setBounds(61, 177, 86, 20);
+		contentPane.add(passField);
+		passField.setColumns(10);
 		
-		textField_1 = new JTextField();// new text field
-		textField_1.setBounds(61, 118, 86, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		userField = new JTextField();// new text field
+		userField.setBounds(61, 118, 86, 20);
+		contentPane.add(userField);
+		userField.setColumns(10);
 		
 		JButton btnEasy = new JButton("Easy");// make a new button
 		btnEasy.setBounds(295, 49, 89, 23);
 		btnEasy.addActionListener(new ActionListener() {// if button is pushed
 			public void actionPerformed(ActionEvent e)
 			{
-				BoardManager bMe = new BoardManager(0, thisManager.getSelectedUser());
-				PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
-				panel.setVisible(true);
-				contentPane.setVisible(false);// destroy the old content pane
-				dispose();
+				if (loggedIn)
+				{
+					BoardManager bMe = new BoardManager(0, thisManager.getSelectedUser());
+					PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
+					panel.setVisible(true);
+					contentPane.setVisible(false);// destroy the old content pane
+					dispose();
+				}
 			}
 		});
 		contentPane.add(btnEasy);
@@ -65,11 +69,14 @@ public class UserPanel extends JFrame
 		btnMedium.addActionListener(new ActionListener() {// same as easy
 			public void actionPerformed(ActionEvent e)
 			{
-				BoardManager bMe = new BoardManager(1, thisManager.getSelectedUser());
-				PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
-				panel.setVisible(true);
-				contentPane.setVisible(false);
-				dispose();
+				if (loggedIn)
+				{
+					BoardManager bMe = new BoardManager(1, thisManager.getSelectedUser());
+					PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
+					panel.setVisible(true);
+					contentPane.setVisible(false);
+					dispose();
+				}
 			}
 		});
 		contentPane.add(btnMedium);
@@ -80,11 +87,14 @@ public class UserPanel extends JFrame
 		btnHard.addActionListener(new ActionListener() {// smae as easy
 			public void actionPerformed(ActionEvent e)
 			{
-				BoardManager bMe = new BoardManager(2, thisManager.getSelectedUser());
-				PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
-				panel.setVisible(true);
-				contentPane.setVisible(false);
-				dispose();
+				if (loggedIn)
+				{
+					BoardManager bMe = new BoardManager(2, thisManager.getSelectedUser());
+					PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
+					panel.setVisible(true);
+					contentPane.setVisible(false);
+					dispose();
+				}
 			}
 		});
 		contentPane.add(btnHard);
@@ -95,11 +105,14 @@ public class UserPanel extends JFrame
 		btnEvil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				BoardManager bMe = new BoardManager(3, thisManager.getSelectedUser());
-				PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
-				panel.setVisible(true);
-				contentPane.setVisible(false);
-				dispose();
+				if (loggedIn)
+				{
+					BoardManager bMe = new BoardManager(3, thisManager.getSelectedUser());
+					PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
+					panel.setVisible(true);
+					contentPane.setVisible(false);
+					dispose();
+				}
 			}
 		});
 		contentPane.add(btnEvil);
@@ -127,11 +140,13 @@ public class UserPanel extends JFrame
 		lblNewLabel.setBounds(77, 34, 69, 14);
 		contentPane.add(lblNewLabel);
 		
-		JLabel messageLable = new JLabel("");
-		messageLable.setBounds(306, 225, 61, 16);
+		messageLable = new JLabel("");
+		messageLable.setForeground(new Color(255, 255, 255));
+		messageLable.setBounds(295, 218, 133, 42);
 		contentPane.add(messageLable);
 		
 		JButton loginButton = new JButton("Login");
+		loginButton.addActionListener(new LoginAction());
 		loginButton.setBounds(50, 243, 117, 29);
 		contentPane.add(loginButton);
 	
@@ -142,11 +157,53 @@ public class UserPanel extends JFrame
 	{
 		public void actionPerformed(ActionEvent e)// add the new user info to user manager
 		{
-				String User = textField.getText();
-				String Password = textField_1.getText();
-				thisManager.addUser(User, Password);
-				
-					
+			String user = userField.getText();
+			String password = passField.getText();
+			
+			if (!user.isEmpty() && !password.isEmpty())
+			{
+				if(thisManager.addUser(user, password))
+				{
+					messageLable.setText("<html><div style=\"text-align: center;\">Created New User<br>" + thisManager.getSelectedUser().getName() + "</html>");
+				}
+				else
+				{
+					messageLable.setText("<html><div style=\"text-align: center;\">A User With that<br>Name Already Exists</html>");
+				}
+			}
+			else
+			{
+				messageLable.setText("<html><div style=\"text-align: center;\">Please Fill<br>All Fields</html>");
+			}
+			
+			contentPane.updateUI();
+		}
+	}
+	
+	private class LoginAction implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)// add the new user info to user manager
+		{
+			String user = userField.getText();
+			String password = passField.getText();
+			if (!user.isEmpty() && !password.isEmpty())
+			{
+				if(thisManager.findUser(user, password))
+				{
+					messageLable.setText(thisManager.getSelectedUser().getName() + " Logged In");
+					loggedIn = true;
+				}
+				else
+				{
+					messageLable.setText("<html><div style=\"text-align: center;\">User Name or <br>Password is Invalid</html>");
+				}
+			}
+			else
+			{
+				messageLable.setText("<html><div style=\"text-align: center;\">Please Fill<br>All Fields</html>");
+			}
+			
+			contentPane.updateUI();
 		}
 	}
 }

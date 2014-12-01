@@ -21,6 +21,7 @@ public class UserManager
 		if (userListHead == null)
 		{
 			userListHead = new UserNode(new User(name, password));
+			selectedUser = userListHead.getUser();
 			addedUser = true;
 		}
 		else
@@ -35,6 +36,7 @@ public class UserManager
 			if (listIterator.getNextUser() == null && !listIterator.getUser().getName().equalsIgnoreCase(name))
 			{
 				listIterator.setNextUser(new UserNode(new User(name, password)));
+				selectedUser = listIterator.getNextUser().getUser();
 				addedUser = true;
 			}
 		}
@@ -48,7 +50,7 @@ public class UserManager
 		
 		if (userListHead == null)
 		{
-			foundUser = true;
+			foundUser = false;
 		}
 		else
 		{
@@ -118,6 +120,7 @@ public class UserManager
 			FileInputStream fileIn = new FileInputStream(fileName);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			userArray = (ArrayList<User>) in.readObject();
+			
 			in.close();
 			fileIn.close();
 			loadedFile = true;
