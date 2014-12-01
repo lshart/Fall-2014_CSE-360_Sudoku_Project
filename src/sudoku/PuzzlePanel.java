@@ -7,6 +7,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PuzzlePanel extends JFrame 
 {
@@ -15,8 +17,10 @@ public class PuzzlePanel extends JFrame
 	private JPanel contentPane;
 	private BoardManager newManager;
 	private CellLabel[][] cellLabelGrid;
-	private JLabel currNumLable;
-	JLabel messageLabel;
+	private JLabel currNumLabel;
+	private JLabel messageLabel;
+	private JLabel hintLabel;
+	private JLabel parTimeLabel;
 	private boolean pen;
 	private boolean erase;
 	
@@ -32,22 +36,26 @@ public class PuzzlePanel extends JFrame
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(30, 144, 255));
 		contentPane.setBorder(new EmptyBorder(9, 9, 9, 9));
-		setContentPane(contentPane);
+		this.setContentPane(contentPane);
 		pen = true;
 		erase = false;
 		
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{124, 83, 59, 63, 71, 0};
-		gbl_contentPane.rowHeights = new int[]{261, 75, 23, 40, 0};
+		gbl_contentPane.rowHeights = new int[]{261, 75, 23, 0, 0, 40, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		
 		JButton btnGetHint = new JButton("Get hint");
+		btnGetHint.addActionListener (new HintButton());
 		btnGetHint.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnGetHint.setFocusable(false);
 		JButton btnEraser = new JButton("Eraser");
+		btnEraser.setFocusable(false);
 		JButton btnPencil = new JButton("Pencil");
+		btnPencil.setFocusable(false);
 
 		
 		JPanel panel = new JPanel();
@@ -107,37 +115,49 @@ public class PuzzlePanel extends JFrame
 		gbc_btnGetHint.gridx = 4;
 		gbc_btnGetHint.gridy = 2;
 		contentPane.add(btnGetHint, gbc_btnGetHint);
-			
-		JTextArea txtrScore = new JTextArea();
 		
-		txtrScore.setBackground(new Color(30, 144, 255));
-		txtrScore.setText("Par Time: 00:00\r\nTime: 00:00");
-		GridBagConstraints gbc_txtrScore = new GridBagConstraints();
-		gbc_txtrScore.anchor = GridBagConstraints.NORTHWEST;
-		gbc_txtrScore.insets = new Insets(0, 0, 0, 5);
-		gbc_txtrScore.gridx = 0;
-		gbc_txtrScore.gridy = 3;
-		contentPane.add(txtrScore, gbc_txtrScore);
+		JLabel timeLabel = new JLabel("Time: 00:00");
+		timeLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_timeLabel = new GridBagConstraints();
+		gbc_timeLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_timeLabel.gridx = 0;
+		gbc_timeLabel.gridy = 3;
+		contentPane.add(timeLabel, gbc_timeLabel);
 		
-		currNumLable = new JLabel();
+		currNumLabel = new JLabel();
 		
-		currNumLable.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		currNumLable.setForeground(Color.BLACK);
-		currNumLable.setHorizontalTextPosition(SwingConstants.CENTER);
-		currNumLable.setHorizontalAlignment(SwingConstants.CENTER);
-
+		currNumLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		currNumLabel.setForeground(Color.BLACK);
+		currNumLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		currNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
 
 		GridBagConstraints gbc_currNumLable = new GridBagConstraints();
 		gbc_currNumLable.fill = GridBagConstraints.BOTH;
-		gbc_currNumLable.insets = new Insets(0, 0, 0, 5);
+		gbc_currNumLable.insets = new Insets(0, 0, 5, 5);
 		gbc_currNumLable.gridx = 2;
 		gbc_currNumLable.gridy = 3;
-		contentPane.add(currNumLable, gbc_currNumLable);
+		contentPane.add(currNumLabel, gbc_currNumLable);
+
+		hintLabel = new JLabel("Hints: ");
+		GridBagConstraints gbc_hintLabel = new GridBagConstraints();
+		gbc_hintLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_hintLabel.gridx = 4;
+		gbc_hintLabel.gridy = 3;
+		contentPane.add(hintLabel, gbc_hintLabel);
+		
+		parTimeLabel = new JLabel("Par Time: 00:00");
+		GridBagConstraints gbc_parTimeLabel = new GridBagConstraints();
+		gbc_parTimeLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_parTimeLabel.gridx = 0;
+		gbc_parTimeLabel.gridy = 4;
+		contentPane.add(parTimeLabel, gbc_parTimeLabel);
 		
 		updatePanel();
 	}
 	
-	private void updatePanel()
+	public void updatePanel()
 	{
 		for (int c = 0; c < 9; c++)
 			for (int r = 0; r < 9; r++)
@@ -148,7 +168,8 @@ public class PuzzlePanel extends JFrame
 					cellLabelGrid[r][c].setText("");
 			}
 		
-		currNumLable.setText(newManager.getCurrentNum() + "");
+		currNumLabel.setText(newManager.getCurrentNum() + "");
+		hintLabel.setText("Hints: " + newManager.getHints());
 		
 		contentPane.updateUI();
 	}
@@ -195,6 +216,28 @@ public class PuzzlePanel extends JFrame
 					newManager.setCurrentNum(tempInt);
 					updatePanel();
 				}
+			}
+		}
+	}
+	
+	private class HintButton implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			if (newManager.getHints() > 0)
+			{
+				int temp = newManager.useHint();
+				String message = "<html><div style=\"text-align: center;\">"+ temp + " incorrect cells <br> removed</html>";
+				
+				messageLabel.setText(message);
+				
+				updatePanel();
+			}
+			else
+			{
+				String message = "<html><div style=\"text-align: center;\"> No hints <br> remaining</html>";
+				
+				messageLabel.setText(message);
 			}
 		}
 	}

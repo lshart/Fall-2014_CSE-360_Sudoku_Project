@@ -27,7 +27,7 @@ public class Board
 			loadPuzzle("Puzzles/Medium1.dat"); //
 			break;
 		case 2:
-			loadPuzzle("Puzzles/Hard1.dat"); // UNTIL SUCH TIME AS I (or someone) MAKES 2 MORE PUZZLES
+			loadPuzzle("Puzzles/Hard1.dat"); 
 			break;
 		case 3:
 			loadPuzzle("Puzzles/Evil1.dat");
@@ -79,8 +79,9 @@ public class Board
 			for (int c = 0; c < SIZE; c++)
 				if (!board[r][c].isCorrect())
 				{
+					if(board[r][c].getValue() != 0)
+						clearedCells++;
 					board[r][c].removeValue();
-					clearedCells++;
 				}
 		
 		return clearedCells;
@@ -203,18 +204,13 @@ public class Board
 		int checkedRow = cellToCheck.getRow();
 		int checkedCol = cellToCheck.getColumn();
 		
-		System.out.println(checkedRow + ", " + checkedCol + " ");
-		
 		checkedRow = checkedRow - checkedRow % 3;
 		checkedCol = checkedCol - checkedCol % 3;
-		
-		System.out.println(checkedRow + ", " + checkedCol + " ");
 		
 		for (int r = checkedRow; r < checkedRow+3; r++)
 		{
 			for (int c = checkedCol; c < checkedCol+3; c++)
 			{
-				System.out.print(r + ", " + c + " ");
 				if (board[r][c].getValue() == numToCheck)
 					unique = false;
 			}

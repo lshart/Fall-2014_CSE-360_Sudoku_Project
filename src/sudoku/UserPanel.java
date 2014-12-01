@@ -107,49 +107,7 @@ public class UserPanel extends JFrame
 		
 		JButton btnCreateNewUser = new JButton("Create new");
 		btnCreateNewUser.setBounds(50, 208, 113, 23);
-		btnCreateNewUser.addActionListener (new ActionListener() {// if create new is clicked 
-			public void actionPerformed(ActionEvent e)// add the new user info to user manager
-			{
-					String User = textField.getText();
-					String Password = textField_1.getText();
-		//		    String u = userNameTxt.getText();
-		//	        String p = passwordTxt.getText();
-			   //     thisManager.addUser(u, p);
-				if(true)
-				{
-	
-					JFrame Messageframe =new JFrame();
-					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					setBounds(100, 100, 228, 139);
-					JPanel usernameWindow = new JPanel();
-					Messageframe.add(usernameWindow);
-					usernameWindow.setBorder(new EmptyBorder(5, 5, 5, 5));
-					setContentPane(usernameWindow);
-					usernameWindow.setLayout(null);
-					JLabel lblNewLabel = new JLabel("Please fill in all fields");
-					lblNewLabel.setBounds(53, 31, 134, 14);
-					usernameWindow.add(lblNewLabel);
-					JButton btnOk = new JButton("Ok");
-					btnOk.setBounds(67, 66, 89, 23);
-					usernameWindow.add(btnOk);
-					usernameWindow.setVisible(true);
-					btnOk.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e)
-						{
-							UserPanel board = new UserPanel(thisManager);
-							board.setVisible(true);
-							
-						//	Messageframe.setVisible(false);
-							dispose();
-							
-						}
-					}
-					);
-					
-				}
-						
-			}
-		});
+		btnCreateNewUser.addActionListener (new NewUserAction()); // if create new is clicked 
 					
 		contentPane.add(btnCreateNewUser);
 		
@@ -168,8 +126,28 @@ public class UserPanel extends JFrame
 		lblNewLabel.setBackground(new Color(30, 144, 255));
 		lblNewLabel.setBounds(77, 34, 69, 14);
 		contentPane.add(lblNewLabel);
+		
+		JLabel messageLable = new JLabel("");
+		messageLable.setBounds(306, 225, 61, 16);
+		contentPane.add(messageLable);
+		
+		JButton loginButton = new JButton("Login");
+		loginButton.setBounds(50, 243, 117, 29);
+		contentPane.add(loginButton);
 	
 
 		}
+	
+	private class NewUserAction implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)// add the new user info to user manager
+		{
+				String User = textField.getText();
+				String Password = textField_1.getText();
+				thisManager.addUser(User, Password);
+				
+					
+		}
+	}
 }
 

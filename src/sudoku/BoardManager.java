@@ -43,7 +43,10 @@ public class BoardManager
 	public int useHint()
 	{
 		if (hints > 0)
+		{
+			hints --;
 			return board.clearBadCells();
+		}
 		else
 			return -1;
 	}
