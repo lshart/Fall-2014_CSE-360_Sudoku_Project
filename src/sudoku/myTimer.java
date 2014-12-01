@@ -11,11 +11,15 @@ public class myTimer
 	private Timer countUp;
 	private int sec;
 	private int min;
-	DecimalFormat leadingZero = new DecimalFormat("#00");//format
-
+	private DecimalFormat leadingZero = new DecimalFormat("#00");//format
+	private PuzzlePanel panelForTest;
+	private int parMin;
+	private int parSec;
 
 	public myTimer()
 	{
+		parMin = 0;
+		parSec = 0;
 		ActionListener actione = new ActionListener()
 		{
 				public void actionPerformed(ActionEvent e)
@@ -41,8 +45,11 @@ public class myTimer
 		min = 0;
 	}
 
-	public myTimer(JLabel timed)
+	public myTimer(JLabel timed, PuzzlePanel tempPanel)
 	{
+		panelForTest = tempPanel;
+		parMin = 0;
+		parSec = 0;
 		ActionListener actione = new ActionListener()
 		{
 				public void actionPerformed(ActionEvent e)
@@ -57,7 +64,7 @@ public class myTimer
 								sec = 0;
 								min++;
 							}
-
+							testPar();
 							timed.setText("Time: " + leadingZero.format(getMin()) + " : " + leadingZero.format(getSec()));
 						}
 					}
@@ -93,6 +100,21 @@ public class myTimer
 	public void setMin (int inc)
 	{
 		min += inc; 
+	}
+	public void setPar(int tempMin, int tempSec)
+	{
+		parMin = tempMin;
+		parSec = tempSec;
+		
+	}
+
+	public void testPar()
+	{
+		if (min >= parMin && sec >= parSec)
+		{
+			panelForTest.toggle_overtime();
+		}
+		
 	}
 
 

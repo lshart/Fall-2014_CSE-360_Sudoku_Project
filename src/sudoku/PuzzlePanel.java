@@ -11,6 +11,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.DecimalFormat;
 
 public class PuzzlePanel extends JFrame 
 {
@@ -26,11 +27,16 @@ public class PuzzlePanel extends JFrame
 	private JLabel timeLabel;
 	private boolean pen;
 	private boolean erase;
+	private boolean overtime_check;
+	private DecimalFormat leadingZero = new DecimalFormat("#00");
+	private myTimer gameTime ;
 	
 	public PuzzlePanel(BoardManager nManager) 
 	{	
 		addKeyListener(new KeyWatcher());
 		setFocusable(true);
+		
+		overtime_check = false;
 		
 		cellLabelGrid = new CellLabel[9][9];
 		newManager = nManager;
@@ -170,16 +176,31 @@ public class PuzzlePanel extends JFrame
 		int tempParTime = newManager.getParTime();
 		int parSeconds = tempParTime % 60;
 		int parMinutes = tempParTime / 60;
-		parTimeLabel = new JLabel("Par Time: "+ parMinutes +":" + parSeconds);
+		parTimeLabel = new JLabel("Par Time: "+ leadingZero.format(parMinutes) +":" + leadingZero.format(parSeconds));
 		GridBagConstraints gbc_parTimeLabel = new GridBagConstraints();
 		gbc_parTimeLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_parTimeLabel.gridx = 0;
 		gbc_parTimeLabel.gridy = 4;
 		contentPane.add(parTimeLabel, gbc_parTimeLabel);
 		
-		myTimer gameTime = new myTimer(timeLabel);
+		gameTime = new myTimer(timeLabel, this);
+		gameTime.setPar(parMinutes, parSeconds);
 		
 		updatePanel();
+	}
+	
+	public void toggle_overtime()
+	{
+		if (!overtime_check)
+		{
+			overtime_check = !overtime_check;
+			newManager.set_overTime();
+		}
+		
+	}
+	public boolean get_overtime()
+	{
+		return overtime_check;
 	}
 	
 	public void updatePanel()
@@ -199,6 +220,12 @@ public class PuzzlePanel extends JFrame
 		contentPane.updateUI();
 	}
 	
+	public void setParTime(int time)
+	{
+		parTimeLabel.setText("Par Time: " + time + " : 00");
+		
+	}
+	
 	private class CellAction extends MouseAdapter
 	{
 		public void mouseClicked(MouseEvent cell) 
@@ -210,7 +237,7 @@ public class PuzzlePanel extends JFrame
 			if (erase)
 			{
 				if(newManager.removeNum(theRow, theCol))
-					newManager.updateTime(5);
+					gameTime.setSec(5);
 			}
 			
 			if (pen)
@@ -267,18 +294,7 @@ public class PuzzlePanel extends JFrame
 		}
 	}
 	
-	private class TimeAction implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e) 
-		{
-			if (newManager.getHints() > 0)
-			{
-				newManager.updateTime();
-				updatePanel();
-			}
-		}
-	}
-	
+
 	private class CellLabel extends JLabel
 	{
 		private static final long serialVersionUID = 453763732448995862L;

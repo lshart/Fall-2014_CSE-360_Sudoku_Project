@@ -12,6 +12,12 @@ public class BoardManager
 	private boolean overTime;	// If true this means the user has gone over par time
 	private User currentUser;
 	
+	private static final int EVIL_PAR = 20*60;
+	private static final int HARD_PAR = 30*60;
+	private static final int MEDIUM_PAR = 40*60;
+	private static final int EASY_PAR = 50*60;
+	
+	
 	public BoardManager(int diff, User currU)
 	{	
 		board = new Board(diff);
@@ -20,7 +26,25 @@ public class BoardManager
 		hints = 4;
 		overTime = false;
 		time = 0;
-		parTime = 1200;
+		
+		if (difficulty == 1)
+		{
+			parTime = MEDIUM_PAR;
+		}
+		else if (difficulty == 2)
+		{
+			parTime = HARD_PAR;
+		}
+		else if (difficulty == 3)
+		{
+			parTime = EVIL_PAR;
+		}
+		else 
+		{
+			parTime = EASY_PAR;
+		}
+		
+		
 		currentNum = 1;
 	}
 	
@@ -85,25 +109,18 @@ public class BoardManager
 	{
 		return parTime;
 	}
+
 	
-	public boolean updateTime()
+	public void set_overTime()
 	{
-		time ++;
-		
-		if (time >= parTime)
-			overTime = true;
-		
-		return overTime;
+		if(!overTime)
+		{
+			overTime = !overTime;
+		}
 	}
-	
-	public boolean updateTime(int penalty)
+	public boolean get_overTime()
 	{
-		time += penalty;
-		
-		if (time >= parTime)
-			overTime = true;
-		
-		return overTime;
+		return overTime;		
 	}
 	
 	public boolean hasWon()

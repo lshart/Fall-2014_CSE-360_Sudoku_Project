@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Board 
 {
 	private static final int SIZE = 9;
-	
+
 	private Cell[][] board;
 	
 	public Board(int difficulty)
