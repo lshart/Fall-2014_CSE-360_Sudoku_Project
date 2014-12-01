@@ -11,7 +11,7 @@ public class myTimer
 	private Timer countUp;
 	private int sec;
 	private int min;
-	DecimalFormat leadingZero = new DecimalFormat("#00");
+	DecimalFormat leadingZero = new DecimalFormat("#00");//format
 
 
 	public myTimer()
