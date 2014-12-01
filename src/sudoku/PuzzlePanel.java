@@ -21,6 +21,7 @@ public class PuzzlePanel extends JFrame
 	private JLabel messageLabel;
 	private JLabel hintLabel;
 	private JLabel parTimeLabel;
+	private JLabel timeLabel;
 	private boolean pen;
 	private boolean erase;
 	
@@ -93,7 +94,16 @@ public class PuzzlePanel extends JFrame
 		gbc_messageLabel.gridy = 1;
 		contentPane.add(messageLabel, gbc_messageLabel);
 		
-		JLabel userLabel = new JLabel("");
+		String curUserStr = newManager.getCurrentUser().getName();
+		String easyWins = "<font color=\"green\">" + newManager.getCurrentUser().getScore(0);
+		String medWins = "<font color=\"orange\">" + newManager.getCurrentUser().getScore(0);
+		String hardWins = "<font color=\"red\">" + newManager.getCurrentUser().getScore(0);
+		String evilWins = "<font color=\"black\">" + newManager.getCurrentUser().getScore(0);
+		String winStr = easyWins + "/" + medWins + "/" + hardWins + "/" + evilWins;
+		JLabel userLabel = new JLabel("<html><div style=\"text-align: center;\">" + curUserStr + " " + winStr + "</html>");
+		userLabel.setHorizontalTextPosition(SwingConstants.LEFT);
+		userLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		
 		GridBagConstraints gbc_userLabel = new GridBagConstraints();
 		gbc_userLabel.anchor = GridBagConstraints.EAST;
 		gbc_userLabel.insets = new Insets(0, 0, 5, 0);
@@ -124,7 +134,7 @@ public class PuzzlePanel extends JFrame
 		gbc_btnGetHint.gridy = 2;
 		contentPane.add(btnGetHint, gbc_btnGetHint);
 		
-		JLabel timeLabel = new JLabel("Time: 00:00");
+		timeLabel = new JLabel("Time: 00:00");
 		timeLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_timeLabel = new GridBagConstraints();

@@ -165,6 +165,7 @@ public class UserPanel extends JFrame
 				if(thisManager.addUser(user, password))
 				{
 					messageLable.setText("<html><div style=\"text-align: center;\">Created New User<br>" + thisManager.getSelectedUser().getName() + "</html>");
+					loggedIn = true;
 				}
 				else
 				{

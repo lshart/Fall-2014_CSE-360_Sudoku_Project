@@ -108,6 +108,11 @@ public class BoardManager
 	
 	public boolean hasWon()
 	{
-		return board.hasWon();
+		boolean won = board.hasWon();
+		if (won)
+		{
+			currentUser.win(difficulty, time, overTime);
+		}
+		return won;
 	}
 }
