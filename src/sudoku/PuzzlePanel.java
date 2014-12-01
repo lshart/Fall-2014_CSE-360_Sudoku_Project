@@ -1,8 +1,10 @@
 package sudoku;
 
 import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.border.*;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
@@ -26,7 +28,7 @@ public class PuzzlePanel extends JFrame
 	private boolean erase;
 	
 	public PuzzlePanel(BoardManager nManager) 
-	{
+	{	
 		addKeyListener(new KeyWatcher());
 		setFocusable(true);
 		
@@ -165,7 +167,10 @@ public class PuzzlePanel extends JFrame
 		gbc_hintLabel.gridy = 3;
 		contentPane.add(hintLabel, gbc_hintLabel);
 		
-		parTimeLabel = new JLabel("Par Time: 00:00");
+		int tempParTime = newManager.getParTime();
+		int parSeconds = tempParTime % 60;
+		int parMinutes = tempParTime / 60;
+		parTimeLabel = new JLabel("Par Time: "+ parMinutes +":" + parSeconds);
 		GridBagConstraints gbc_parTimeLabel = new GridBagConstraints();
 		gbc_parTimeLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_parTimeLabel.gridx = 0;
@@ -260,6 +265,17 @@ public class PuzzlePanel extends JFrame
 		}
 	}
 	
+	private class TimeAction implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			if (newManager.getHints() > 0)
+			{
+				newManager.updateTime();
+				updatePanel();
+			}
+		}
+	}
 	
 	private class CellLabel extends JLabel
 	{
