@@ -1,16 +1,20 @@
 package sudoku;
 
-import javax.swing.Timer;//imports
+import javax.swing.JLabel;
+import javax.swing.Timer;
+
 import java.awt.event.*;
+import java.text.DecimalFormat;
 
 public class myTimer
 {
 	private Timer countUp;
 	private int sec;
 	private int min;
+	DecimalFormat leadingZero = new DecimalFormat("#00");
 
 
-	private myTimer()
+	public myTimer()
 	{
 		ActionListener actione = new ActionListener()
 		{
@@ -27,7 +31,34 @@ public class myTimer
 								min++;
 							}
 
-							PuzzlePanel.updatePanel();
+						}
+					}
+
+		};
+		countUp = new Timer(1000, actione);
+		countUp.start();
+		sec = 0;
+		min = 0;
+	}
+
+	public myTimer(JLabel timed)
+	{
+		ActionListener actione = new ActionListener()
+		{
+				public void actionPerformed(ActionEvent e)
+					{
+
+						if(e.getSource() == countUp)
+						{
+							sec++;
+
+							if(sec == 60)
+							{
+								sec = 0;
+								min++;
+							}
+
+							timed.setText("Time: " + leadingZero.format(getMin()) + " : " + leadingZero.format(getSec()));
 						}
 					}
 

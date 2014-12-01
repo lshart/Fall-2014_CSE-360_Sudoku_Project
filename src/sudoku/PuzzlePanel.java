@@ -172,6 +172,8 @@ public class PuzzlePanel extends JFrame
 		gbc_parTimeLabel.gridy = 4;
 		contentPane.add(parTimeLabel, gbc_parTimeLabel);
 		
+		myTimer gameTime = new myTimer(timeLabel);
+		
 		updatePanel();
 	}
 	
