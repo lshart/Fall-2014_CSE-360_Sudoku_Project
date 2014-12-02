@@ -246,11 +246,22 @@ public class PuzzlePanel extends JFrame
 			{
 				if(!newManager.placeNum(theRow, theCol))
 				{
-					messageLabel.setText("<html><div style=\"text-align: center;\">INVALID<br> MOVE</html>");
+					//messageLabel.setText("<html><div style=\"text-align: center;\">INVALID<br> MOVE</html>");
+					if(!newManager.isHint(theRow, theCol) && cellLabelGrid[theRow][theCol].getText() != null)
+					{
+						cellLabelGrid[theRow][theCol].setForeground(Color.RED);
+						messageLabel.setText(null);
+					}
+					else
+					{
+						messageLabel.setText("<html><div style=\"text-align: center;\">Cell is a<br> hint</html>");
+					}
 				}
 				else
+				{
 					messageLabel.setText(null);
-					
+					cellLabelGrid[theRow][theCol].setForeground(Color.BLACK);
+				}
 
 			}
 			updatePanel();		
@@ -270,6 +281,8 @@ public class PuzzlePanel extends JFrame
 				int tempInt = Integer.parseInt(temp);
 				if (tempInt != 0)
 				{
+					pen = true;
+					erase = false;
 					newManager.setCurrentNum(tempInt);
 					updatePanel();
 				}
@@ -287,7 +300,7 @@ public class PuzzlePanel extends JFrame
 				String message = "<html><div style=\"text-align: center;\">"+ temp + " incorrect cells <br> removed</html>";
 				
 				messageLabel.setText(message);
-				
+				gameTime.setSec(5);
 				updatePanel();
 			}
 			else

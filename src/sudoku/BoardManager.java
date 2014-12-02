@@ -48,6 +48,11 @@ public class BoardManager
 		currentNum = 1;
 	}
 	
+	public boolean isHint(int row, int col)
+	{
+		return board.isHint(row, col);
+		
+	}
 	public boolean placeNum(int row, int col)
 	{
 		return board.placeValue(row, col, currentNum);

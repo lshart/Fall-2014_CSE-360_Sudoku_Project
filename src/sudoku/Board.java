@@ -39,6 +39,14 @@ public class Board
 	
 	// Places a value at the specified cell, so long as it's a valid place.  Returns false if
 	// it can't place the value. 
+	public boolean isHint(int row, int col)
+	{
+		return board[row][col].isClue();
+		
+	}
+	
+	
+	
 	public boolean placeValue(int row, int col, int numToPlace)
 	{
 		if (checkPlace(row, col, numToPlace))
@@ -46,7 +54,10 @@ public class Board
 			return board[row][col].setValue(numToPlace);
 		}
 		else
+		{
+			board[row][col].setValue(numToPlace);
 			return false;
+		}
 	}
 	
 	// Asks the Cell to attempt to remove a value from a cell.  If it is one of the clues, then
