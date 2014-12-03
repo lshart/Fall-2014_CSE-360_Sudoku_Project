@@ -31,6 +31,8 @@ public class PuzzlePanel extends JFrame
 	private boolean overtime_check;
 	private DecimalFormat leadingZero = new DecimalFormat("#00");
 	private myTimer gameTime;
+	private JLabel lblCurrentPlayer;
+	private JButton btnQuit;
 	
 	public PuzzlePanel(BoardManager nManager, UserManager uManager) 
 	{	
@@ -45,9 +47,9 @@ public class PuzzlePanel extends JFrame
 		cellLabelGrid = new CellLabel[9][9];
 		newManager = nManager;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 498, 473);
+		setBounds(100, 100, 460, 515);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(30, 144, 255));
+		contentPane.setBackground(SystemColor.menu);
 		contentPane.setBorder(new EmptyBorder(9, 9, 9, 9));
 		this.setContentPane(contentPane);
 		pen = true;
@@ -110,11 +112,21 @@ public class PuzzlePanel extends JFrame
 		
 		String curUserStr = newManager.getCurrentUser().getName();
 		String easyWins = "<font color=\"green\">" + newManager.getCurrentUser().getScore(0);
-		String medWins = "<font color=\"orange\">" + newManager.getCurrentUser().getScore(0);
-		String hardWins = "<font color=\"red\">" + newManager.getCurrentUser().getScore(0);
-		String evilWins = "<font color=\"black\">" + newManager.getCurrentUser().getScore(0);
+		String medWins = "<font color=\"orange\">" + newManager.getCurrentUser().getScore(1);
+		String hardWins = "<font color=\"red\">" + newManager.getCurrentUser().getScore(2);
+		String evilWins = "<font color=\"black\">" + newManager.getCurrentUser().getScore(3);
 		String winStr = easyWins + "/" + medWins + "/" + hardWins + "/" + evilWins;
-		JLabel userLabel = new JLabel("<html><div style=\"text-align: center;\">" + curUserStr + " " + winStr + "</html>");
+		
+		lblCurrentPlayer = new JLabel("Current Player:");
+		lblCurrentPlayer.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		GridBagConstraints gbc_lblCurrentPlayer = new GridBagConstraints();
+		gbc_lblCurrentPlayer.gridwidth = 2;
+		gbc_lblCurrentPlayer.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCurrentPlayer.gridx = 2;
+		gbc_lblCurrentPlayer.gridy = 1;
+		contentPane.add(lblCurrentPlayer, gbc_lblCurrentPlayer);
+		JLabel userLabel = new JLabel("<html><div style=\"text-align: left;\"><dynamic> <font color=\"green\">0/<font color=\"orange\">0/<font color=\"red\">0/<font color=\"black\">0</html>");
+		userLabel.setText("<html><div style=\"text-align: left;\"><dynamic>" + curUserStr + " " + winStr);
 		userLabel.setHorizontalTextPosition(SwingConstants.LEFT);
 		userLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		
@@ -190,6 +202,22 @@ public class PuzzlePanel extends JFrame
 		contentPane.add(parTimeLabel, gbc_parTimeLabel);
 		
 		gameTime = new myTimer(timeLabel, this);
+		
+		btnQuit = new JButton("Quit");
+		btnQuit.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				UserPanel panel = new UserPanel(thisUserManager);
+				panel.setVisible(true);
+				contentPane.setVisible(false);
+				dispose();
+			}
+		});
+		GridBagConstraints gbc_btnQuit = new GridBagConstraints();
+		gbc_btnQuit.gridx = 4;
+		gbc_btnQuit.gridy = 5;
+		contentPane.add(btnQuit, gbc_btnQuit);
 		gameTime.setPar(parMinutes, parSeconds);
 		
 		updatePanel();
@@ -201,6 +229,7 @@ public class PuzzlePanel extends JFrame
 		{
 			overtime_check = !overtime_check;
 			newManager.set_overTime();
+			timeLabel.setForeground(Color.RED);
 		}
 		
 	}
@@ -211,6 +240,7 @@ public class PuzzlePanel extends JFrame
 	
 	public void updatePanel()
 	{
+		toggle_overtime();
 		for (int r = 0; r < 9; r++)
 		{
 			for (int c = 0; c < 9; c++)
@@ -278,7 +308,10 @@ public class PuzzlePanel extends JFrame
 					updatePanel();
 					if (newManager.hasWon(gameTime.getMin(), gameTime.getSec()))
 					{
-						
+						WinScreen panel = new WinScreen(thisUserManager);
+						panel.setVisible(true);
+						contentPane.setVisible(false);
+						dispose();
 					}
 				}
 

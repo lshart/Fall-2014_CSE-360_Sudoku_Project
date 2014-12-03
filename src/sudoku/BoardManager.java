@@ -42,7 +42,7 @@ public class BoardManager
 			parTime = EASY_PAR;
 		}
 		
-		
+		currentUser.startGame(difficulty);
 		currentNum = 1;
 	}
 	

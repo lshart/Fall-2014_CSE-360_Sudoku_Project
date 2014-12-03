@@ -76,6 +76,20 @@ public class UserManager
 		return selectedUser;
 	}
 	
+	public boolean isLoggedIn()
+	{
+		if (selectedUser == null)
+			return false;
+		else
+			return true;
+	}
+	
+	public boolean logOut()
+	{
+		selectedUser = null;
+		return true;
+	}
+	
 	public boolean storeUserList (String fileName)
 	{
 		boolean savedFile = false;
