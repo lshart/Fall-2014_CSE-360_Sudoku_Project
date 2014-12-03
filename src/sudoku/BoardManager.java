@@ -107,7 +107,6 @@ public class BoardManager
 	{
 		return parTime;
 	}
-
 	
 	public void set_overTime()
 	{
@@ -129,5 +128,10 @@ public class BoardManager
 			currentUser.win(difficulty, min, sec, overTime);
 		}
 		return won;
+	}
+	
+	public void cheatWin()
+	{
+		board.solveBoard();
 	}
 }

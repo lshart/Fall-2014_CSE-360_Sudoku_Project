@@ -34,7 +34,7 @@ public class UserPanel extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 352, 307);
 		contentPane = new JPanel();// make a new panel
-		contentPane.setBackground(SystemColor.menu);// set color and border and such
+		contentPane.setBackground(new Color(245, 245, 245));// set color and border and such
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -214,7 +214,7 @@ public class UserPanel extends JFrame
 			}
 			else
 			{
-				messageLable.setText("<html><div style=\"text-align: center;\">Please Fill<br>All Fields</html>");
+				messageLable.setText("<html><div style=\"text-align: center;\">Please fill in<br>all fields</html>");
 			}
 			
 			contentPane.updateUI();
@@ -242,7 +242,7 @@ public class UserPanel extends JFrame
 			}
 			else
 			{
-				messageLable.setText("<html><div style=\"text-align: center;\">Please Fill<br>All Fields</html>");
+				messageLable.setText("<html><div style=\"text-align: center;\">Please fill in<br>all fields</html>");
 			}
 			
 			contentPane.updateUI();

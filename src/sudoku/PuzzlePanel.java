@@ -33,11 +33,25 @@ public class PuzzlePanel extends JFrame
 	private myTimer gameTime;
 	private JLabel lblCurrentPlayer;
 	private JButton btnQuit;
+	private JPanel scorePanel;
+	private JPanel gridSubPanel;
+	private JPanel messagePanel;
 	
 	public PuzzlePanel(BoardManager nManager, UserManager uManager) 
 	{	
+		JPanel cellGridPanel = new JPanel();
 		thisUserManager = uManager;
 		thisUserManager.storeUserList(Sudoku.FILE_NAME);
+		
+		timeLabel = new JLabel("Time: 00:00");
+		gameTime = new myTimer(timeLabel, this);
+		
+		newManager = nManager;
+		
+		int tempParTime = newManager.getParTime();
+		int parSeconds = tempParTime % 60;
+		int parMinutes = tempParTime / 60;
+		gameTime.setPar(parMinutes, parSeconds);
 		
 		addKeyListener(new KeyWatcher());
 		setFocusable(true);
@@ -45,47 +59,21 @@ public class PuzzlePanel extends JFrame
 		overtime_check = false;
 		
 		cellLabelGrid = new CellLabel[9][9];
-		newManager = nManager;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 460, 515);
+		setBounds(100, 100, 440, 647);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.menu);
+		contentPane.setBackground(new Color(245, 245, 245));
 		contentPane.setBorder(new EmptyBorder(9, 9, 9, 9));
 		this.setContentPane(contentPane);
 		pen = true;
 		erase = false;
 		
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{124, 83, 59, 63, 71, 0};
-		gbl_contentPane.rowHeights = new int[]{261, 75, 23, 0, 0, 40, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[] {124};
+		gbl_contentPane.rowHeights = new int[] {1, 300};
+		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 		contentPane.setLayout(gbl_contentPane);
-		
-		
-		JButton btnGetHint = new JButton("Get hint");
-		btnGetHint.addActionListener (new HintButton());
-		btnGetHint.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnGetHint.setFocusable(false);
-		JButton btnEraser = new JButton("Eraser");
-		btnEraser.addActionListener (new eraseButton());
-		btnEraser.setFocusable(false);
-		JButton btnPencil = new JButton("Pencil");
-		btnPencil.addActionListener (new penButton());
-		btnPencil.setFocusable(false);
-
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.BLACK);
-		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.insets = new Insets(0, 0, 5, 0);
-		gbc_panel.gridwidth = 5;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 0;
-		contentPane.add(panel, gbc_panel);
-		panel.setLayout(new GridLayout(9, 9, 1, 1));
 		
 		for (int r = 0; r < 9; r++)
 			for (int c = 0; c < 9; c++)
@@ -96,78 +84,112 @@ public class PuzzlePanel extends JFrame
 				cellLabelGrid[r][c].setHorizontalTextPosition(SwingConstants.CENTER);
 				cellLabelGrid[r][c].setHorizontalAlignment(SwingConstants.CENTER);
 				cellLabelGrid[r][c].addMouseListener(new CellAction());
-				panel.add(cellLabelGrid[r][c]);
+				cellGridPanel.add(cellLabelGrid[r][c]);
 			}
 		
-		messageLabel = new JLabel("");
-		messageLabel.setForeground(Color.ORANGE);
-		messageLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		messageLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-		messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_messageLabel = new GridBagConstraints();
-		gbc_messageLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_messageLabel.gridx = 0;
-		gbc_messageLabel.gridy = 1;
-		contentPane.add(messageLabel, gbc_messageLabel);
-		
 		String curUserStr = newManager.getCurrentUser().getName();
-		String easyWins = "<font color=\"green\">" + newManager.getCurrentUser().getScore(0);
-		String medWins = "<font color=\"orange\">" + newManager.getCurrentUser().getScore(1);
-		String hardWins = "<font color=\"red\">" + newManager.getCurrentUser().getScore(2);
-		String evilWins = "<font color=\"black\">" + newManager.getCurrentUser().getScore(3);
-		String winStr = easyWins + "/" + medWins + "/" + hardWins + "/" + evilWins;
-		
-		lblCurrentPlayer = new JLabel("Current Player:");
-		lblCurrentPlayer.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GridBagConstraints gbc_lblCurrentPlayer = new GridBagConstraints();
-		gbc_lblCurrentPlayer.gridwidth = 2;
-		gbc_lblCurrentPlayer.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCurrentPlayer.gridx = 2;
-		gbc_lblCurrentPlayer.gridy = 1;
-		contentPane.add(lblCurrentPlayer, gbc_lblCurrentPlayer);
-		JLabel userLabel = new JLabel("<html><div style=\"text-align: left;\"><dynamic> <font color=\"green\">0/<font color=\"orange\">0/<font color=\"red\">0/<font color=\"black\">0</html>");
-		userLabel.setText("<html><div style=\"text-align: left;\"><dynamic>" + curUserStr + " " + winStr);
-		userLabel.setHorizontalTextPosition(SwingConstants.LEFT);
-		userLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		
-		GridBagConstraints gbc_userLabel = new GridBagConstraints();
-		gbc_userLabel.anchor = GridBagConstraints.EAST;
-		gbc_userLabel.insets = new Insets(0, 0, 5, 0);
-		gbc_userLabel.gridx = 4;
-		gbc_userLabel.gridy = 1;
-		contentPane.add(userLabel, gbc_userLabel);
 
-		btnPencil.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		GridBagConstraints gbc_btnPencil = new GridBagConstraints();
-		gbc_btnPencil.anchor = GridBagConstraints.SOUTH;
-		gbc_btnPencil.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnPencil.insets = new Insets(0, 0, 5, 5);
-		gbc_btnPencil.gridx = 2;
-		gbc_btnPencil.gridy = 2;
-		contentPane.add(btnPencil, gbc_btnPencil);
-		btnEraser.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		GridBagConstraints gbc_btnEraser = new GridBagConstraints();
-		gbc_btnEraser.anchor = GridBagConstraints.SOUTH;
-		gbc_btnEraser.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnEraser.insets = new Insets(0, 0, 5, 5);
-		gbc_btnEraser.gridx = 3;
-		gbc_btnEraser.gridy = 2;
-		contentPane.add(btnEraser, gbc_btnEraser);
-		GridBagConstraints gbc_btnGetHint = new GridBagConstraints();
-		gbc_btnGetHint.anchor = GridBagConstraints.NORTH;
-		gbc_btnGetHint.insets = new Insets(0, 0, 5, 0);
-		gbc_btnGetHint.gridx = 4;
-		gbc_btnGetHint.gridy = 2;
-		contentPane.add(btnGetHint, gbc_btnGetHint);
+		String winStr = newManager.getCurrentUser().printUserScore();
 		
-		timeLabel = new JLabel("Time: 00:00");
+		gridSubPanel = new JPanel();
+		gridSubPanel.setBackground(new Color(245, 245, 245));
+		gridSubPanel.setLayout(null);
+		GridBagConstraints gbc_gridSubPanel = new GridBagConstraints();
+		gbc_gridSubPanel.gridheight = 6;
+		gbc_gridSubPanel.gridwidth = 7;
+		gbc_gridSubPanel.insets = new Insets(0, 0, 5, 0);
+		gbc_gridSubPanel.fill = GridBagConstraints.BOTH;
+		gbc_gridSubPanel.gridx = 0;
+		gbc_gridSubPanel.gridy = 0;
+		contentPane.add(gridSubPanel, gbc_gridSubPanel);
+		
+				
+				cellGridPanel.setBounds(10, 11, 390, 390);
+				gridSubPanel.add(cellGridPanel);
+				cellGridPanel.setBackground(Color.BLACK);
+				cellGridPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				cellGridPanel.setLayout(new GridLayout(9, 9, 1, 1));
+				
+				messagePanel = new JPanel();
+				messagePanel.setBackground(new Color(245, 245, 245));
+				messagePanel.setBounds(10, 426, 99, 17);
+				gridSubPanel.add(messagePanel);
+				messagePanel.setLayout(null);
+				
+				messageLabel = new JLabel("");
+				messageLabel.setBounds(0, 0, 0, 0);
+				messagePanel.add(messageLabel);
+				messageLabel.setForeground(Color.ORANGE);
+				messageLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+				messageLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+				messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+				
+				scorePanel = new JPanel();
+				scorePanel.setBackground(new Color(245, 245, 245));
+				scorePanel.setBounds(140, 412, 214, 33);
+				gridSubPanel.add(scorePanel);
+				scorePanel.setLayout(null);
+				
+				lblCurrentPlayer = new JLabel("Current Player:");
+				lblCurrentPlayer.setBounds(10, 11, 87, 16);
+				scorePanel.add(lblCurrentPlayer);
+				lblCurrentPlayer.setFont(new Font("Tahoma", Font.PLAIN, 13));
+				
+				JLabel userLabel = new JLabel("");
+				userLabel.setBackground(new Color(245, 245, 245));
+				userLabel.setBounds(111, 11, 97, 16);
+				scorePanel.add(userLabel);
+				userLabel.setText("<html><div style=\"text-align: left;\">" + curUserStr + " " + winStr + "</html>");
+				userLabel.setHorizontalTextPosition(SwingConstants.LEFT);
+				userLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		
 		timeLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_timeLabel = new GridBagConstraints();
 		gbc_timeLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_timeLabel.gridx = 0;
-		gbc_timeLabel.gridy = 3;
+		gbc_timeLabel.gridy = 6;
 		contentPane.add(timeLabel, gbc_timeLabel);
+	
+		JButton btnPencil = new JButton("Pencil");
+		btnPencil.addActionListener (new penButton());
+		btnPencil.setFocusable(false);
+		
+				btnPencil.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				GridBagConstraints gbc_btnPencil = new GridBagConstraints();
+				gbc_btnPencil.fill = GridBagConstraints.HORIZONTAL;
+				gbc_btnPencil.insets = new Insets(0, 0, 5, 5);
+				gbc_btnPencil.gridx = 2;
+				gbc_btnPencil.gridy = 6;
+				contentPane.add(btnPencil, gbc_btnPencil);
+		JButton btnEraser = new JButton("Eraser");
+		btnEraser.addActionListener (new eraseButton());
+		btnEraser.setFocusable(false);
+		btnEraser.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		GridBagConstraints gbc_btnEraser = new GridBagConstraints();
+		gbc_btnEraser.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnEraser.insets = new Insets(0, 0, 5, 5);
+		gbc_btnEraser.gridx = 3;
+		gbc_btnEraser.gridy = 6;
+		contentPane.add(btnEraser, gbc_btnEraser);
+		
+		
+		JButton btnGetHint = new JButton("Get hint");
+		btnGetHint.addActionListener (new HintButton());
+		btnGetHint.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnGetHint.setFocusable(false);
+		GridBagConstraints gbc_btnGetHint = new GridBagConstraints();
+		gbc_btnGetHint.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnGetHint.insets = new Insets(0, 0, 5, 5);
+		gbc_btnGetHint.gridx = 4;
+		gbc_btnGetHint.gridy = 6;
+		contentPane.add(btnGetHint, gbc_btnGetHint);
+		parTimeLabel = new JLabel("Par Time: "+ leadingZero.format(parMinutes) +":" + leadingZero.format(parSeconds));
+		GridBagConstraints gbc_parTimeLabel = new GridBagConstraints();
+		gbc_parTimeLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_parTimeLabel.gridx = 0;
+		gbc_parTimeLabel.gridy = 7;
+		contentPane.add(parTimeLabel, gbc_parTimeLabel);
 		
 		currNumLabel = new JLabel();
 		
@@ -181,27 +203,15 @@ public class PuzzlePanel extends JFrame
 		gbc_currNumLable.fill = GridBagConstraints.BOTH;
 		gbc_currNumLable.insets = new Insets(0, 0, 5, 5);
 		gbc_currNumLable.gridx = 2;
-		gbc_currNumLable.gridy = 3;
+		gbc_currNumLable.gridy = 7;
 		contentPane.add(currNumLabel, gbc_currNumLable);
-
-		hintLabel = new JLabel("Hints: ");
-		GridBagConstraints gbc_hintLabel = new GridBagConstraints();
-		gbc_hintLabel.insets = new Insets(0, 0, 5, 0);
-		gbc_hintLabel.gridx = 4;
-		gbc_hintLabel.gridy = 3;
-		contentPane.add(hintLabel, gbc_hintLabel);
 		
-		int tempParTime = newManager.getParTime();
-		int parSeconds = tempParTime % 60;
-		int parMinutes = tempParTime / 60;
-		parTimeLabel = new JLabel("Par Time: "+ leadingZero.format(parMinutes) +":" + leadingZero.format(parSeconds));
-		GridBagConstraints gbc_parTimeLabel = new GridBagConstraints();
-		gbc_parTimeLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_parTimeLabel.gridx = 0;
-		gbc_parTimeLabel.gridy = 4;
-		contentPane.add(parTimeLabel, gbc_parTimeLabel);
-		
-		gameTime = new myTimer(timeLabel, this);
+				hintLabel = new JLabel("Hints: ");
+				GridBagConstraints gbc_hintLabel = new GridBagConstraints();
+				gbc_hintLabel.insets = new Insets(0, 0, 5, 5);
+				gbc_hintLabel.gridx = 4;
+				gbc_hintLabel.gridy = 7;
+				contentPane.add(hintLabel, gbc_hintLabel);
 		
 		btnQuit = new JButton("Quit");
 		btnQuit.addActionListener(new ActionListener() 
@@ -215,10 +225,11 @@ public class PuzzlePanel extends JFrame
 			}
 		});
 		GridBagConstraints gbc_btnQuit = new GridBagConstraints();
+		gbc_btnQuit.insets = new Insets(0, 0, 5, 5);
 		gbc_btnQuit.gridx = 4;
-		gbc_btnQuit.gridy = 5;
+		gbc_btnQuit.gridy = 8;
 		contentPane.add(btnQuit, gbc_btnQuit);
-		gameTime.setPar(parMinutes, parSeconds);
+		
 		
 		updatePanel();
 	}
@@ -280,6 +291,7 @@ public class PuzzlePanel extends JFrame
 			{
 				if(newManager.removeNum(theRow, theCol))
 					gameTime.setSec(5);
+				updatePanel();
 			}
 			
 			if (pen)
@@ -308,7 +320,7 @@ public class PuzzlePanel extends JFrame
 					updatePanel();
 					if (newManager.hasWon(gameTime.getMin(), gameTime.getSec()))
 					{
-						WinScreen panel = new WinScreen(thisUserManager);
+						WinScreen panel = new WinScreen(thisUserManager, gameTime.getMin(), gameTime.getSec());
 						panel.setVisible(true);
 						contentPane.setVisible(false);
 						dispose();
@@ -338,6 +350,12 @@ public class PuzzlePanel extends JFrame
 					newManager.setCurrentNum(tempInt);
 					updatePanel();
 				}
+			}
+			
+			if (key.getKeyCode() == 35)
+			{
+				newManager.cheatWin();
+				updatePanel();
 			}
 		}
 	}
