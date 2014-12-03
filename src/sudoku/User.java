@@ -60,6 +60,15 @@ public class User implements Serializable
 		return retStr;
 	}
 	
+	public String printUserScore()
+	{
+		String easyWins = "<font color=\"green\">" + winCount[0];
+		String medWins = "<font color=\"orange\">" + winCount[1];
+		String hardWins = "<font color=\"red\">" + winCount[2];
+		String evilWins = "<font color=\"black\">" +  winCount[3];
+		return easyWins + "/" + medWins + "/" + hardWins + "/" + evilWins;
+	}
+	
 	public boolean checkPass(String passToCheck)
 	{
 		return password.equals(passToCheck);
