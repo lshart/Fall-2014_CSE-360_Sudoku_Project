@@ -8,10 +8,15 @@ public class UserManager
 	private User selectedUser;
 	private UserNode userListHead;
 	
+	UserNode tempCurrent = userListHead; // for highscores
+	UserNode tempNext = null;			//for highscores
+	
 	public UserManager()
 	{
 		selectedUser = null;
 		userListHead = null;
+		
+		
 	}
 	
 	public boolean addUser(String name, String password)
@@ -169,7 +174,31 @@ public class UserManager
 		return loadedFile;
 	}
 	
-	private class UserNode
+	public User HighScoreMethod()
+	{
+		if(tempCurrent == null && tempNext == null)
+		{
+			System.out.println("wrong");
+			tempCurrent = userListHead;
+			tempNext = tempCurrent;
+			tempCurrent = tempCurrent.getNextUser();
+			return tempNext.getUser();
+		}
+		else if (tempCurrent == null && tempNext != null)
+		{
+			return null;
+		}
+		else
+		{
+			tempNext = tempCurrent;
+			tempCurrent = tempCurrent.getNextUser();
+			return tempNext.getUser();
+			
+		}
+		
+	}
+	
+	public class UserNode
 	{
 		private User thisUser;
 		private UserNode nextUser;

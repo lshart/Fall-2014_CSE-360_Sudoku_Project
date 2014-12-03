@@ -180,6 +180,16 @@ public class UserPanel extends JFrame
 			logOutButton.setText("Log off");
 		logOutButton.setBounds(50, 235, 113, 23);
 		contentPane.add(logOutButton);
+		
+		JButton btnHighScore = new JButton("High Score");
+		btnHighScore.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HighScore score = new HighScore();
+				score.setVisible(true);
+			}
+		});
+		btnHighScore.setBounds(237, 11, 89, 23);
+		contentPane.add(btnHighScore);
 		}
 	
 	private class NewUserAction implements ActionListener
