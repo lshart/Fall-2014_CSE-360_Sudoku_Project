@@ -55,7 +55,7 @@ public class UserPanel extends JFrame
 				if (loggedIn)
 				{
 					BoardManager bMe = new BoardManager(0, thisManager.getSelectedUser());
-					PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
+					PuzzlePanel panel = new PuzzlePanel(bMe, thisManager);// get new puzzle board
 					panel.setVisible(true);
 					contentPane.setVisible(false);// destroy the old content pane
 					dispose();
@@ -72,7 +72,7 @@ public class UserPanel extends JFrame
 				if (loggedIn)
 				{
 					BoardManager bMe = new BoardManager(1, thisManager.getSelectedUser());
-					PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
+					PuzzlePanel panel = new PuzzlePanel(bMe, thisManager);// get new puzzle board
 					panel.setVisible(true);
 					contentPane.setVisible(false);
 					dispose();
@@ -90,7 +90,7 @@ public class UserPanel extends JFrame
 				if (loggedIn)
 				{
 					BoardManager bMe = new BoardManager(2, thisManager.getSelectedUser());
-					PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
+					PuzzlePanel panel = new PuzzlePanel(bMe,thisManager);// get new puzzle board
 					panel.setVisible(true);
 					contentPane.setVisible(false);
 					dispose();
@@ -108,7 +108,7 @@ public class UserPanel extends JFrame
 				if (loggedIn)
 				{
 					BoardManager bMe = new BoardManager(3, thisManager.getSelectedUser());
-					PuzzlePanel panel = new PuzzlePanel(bMe);// get new puzzle board
+					PuzzlePanel panel = new PuzzlePanel(bMe, thisManager);// get new puzzle board
 					panel.setVisible(true);
 					contentPane.setVisible(false);
 					dispose();

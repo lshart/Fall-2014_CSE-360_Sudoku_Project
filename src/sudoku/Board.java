@@ -55,7 +55,7 @@ public class Board
 		}
 		else
 		{
-			board[row][col].setValue(numToPlace);
+		//	board[row][col].setValue(numToPlace);
 			return false;
 		}
 	}

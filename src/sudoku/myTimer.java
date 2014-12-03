@@ -45,7 +45,7 @@ public class myTimer
 		min = 0;
 	}
 
-	public myTimer(JLabel timed, PuzzlePanel tempPanel)
+	public myTimer(final JLabel timed, PuzzlePanel tempPanel)
 	{
 		panelForTest = tempPanel;
 		parMin = 0;

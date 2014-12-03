@@ -25,6 +25,7 @@ public class User implements Serializable
 		{
 			winCount[i] = 0;
 			fastestTime[i] = -1;
+			fastestTime[i] = -1;
 		}
 	}
 	
@@ -33,8 +34,9 @@ public class User implements Serializable
 		winCount[difficulty] --;
 	}
 	
-	public void win(int difficulty, int time, boolean underPar)
+	public void win(int difficulty, int min, int sec, boolean underPar)
 	{
+		int time = min*60 + sec;
 		if (underPar)
 		{
 			if (fastestTime[difficulty] > time || fastestTime[difficulty] < -1)
@@ -50,9 +52,12 @@ public class User implements Serializable
 		}
 	}
 	
-	public int getFastestTime(int difficulty)
+	public String getFastestTime(int difficulty)
 	{
-		return fastestTime[difficulty];
+		int min = fastestTime[difficulty] / 60;
+		int sec = fastestTime[difficulty] % 60;
+		String retStr = min + ":" + sec;
+		return retStr;
 	}
 	
 	public boolean checkPass(String passToCheck)

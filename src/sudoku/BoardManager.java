@@ -6,7 +6,6 @@ public class BoardManager
 	private Board board;		// This will be 9 by 9
 	private int difficulty;
 	private int hints;
-	private int time;			// in seconds
 	private int parTime;		// in seconds
 	private int currentNum;		// This represents the number the user is trying to input
 	private boolean overTime;	// If true this means the user has gone over par time
@@ -25,7 +24,6 @@ public class BoardManager
 		currentUser = currU;
 		hints = 4;
 		overTime = false;
-		time = 0;
 		
 		if (difficulty == 1)
 		{
@@ -105,11 +103,6 @@ public class BoardManager
 		currentNum = newNum;
 	}
 	
-	public int getTime()
-	{
-		return time;
-	}
-	
 	public int getParTime()
 	{
 		return parTime;
@@ -128,12 +121,12 @@ public class BoardManager
 		return overTime;		
 	}
 	
-	public boolean hasWon()
+	public boolean hasWon(int min, int sec)
 	{
 		boolean won = board.hasWon();
 		if (won)
 		{
-			currentUser.win(difficulty, time, overTime);
+			currentUser.win(difficulty, min, sec, overTime);
 		}
 		return won;
 	}
