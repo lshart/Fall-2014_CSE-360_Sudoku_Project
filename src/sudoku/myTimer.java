@@ -1,3 +1,6 @@
+/////////////
+// The myTimer class creates the timer that will displayed on the puzzle pannel, and it will add penalties accordingly. 
+/////////////
 package sudoku;
 
 import javax.swing.JLabel;
