@@ -1,9 +1,13 @@
 package sudoku;
 
+import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JButton;
+
 import java.awt.Color;
 
 import javax.swing.DefaultListModel;
@@ -12,6 +16,9 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JList;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class HighScore extends JFrame 
@@ -25,8 +32,7 @@ public class HighScore extends JFrame
 	/**
 	 * Create the frame.
 	 */
-	private static final String TITLEINFO = "USER NAME /t/t/t SCORE";
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static final String TITLEINFO = "<html><div style=\"text-align: center;\">User Name<br> Score: / Easy / Medium / Hard / Evil</html>";
 	DefaultListModel<String> listModel = new DefaultListModel();
 	
 	
@@ -67,9 +73,8 @@ public class HighScore extends JFrame
 		
 		
 		scrollPane.setViewportView(scores);
-		listModel.addElement(TITLEINFO);
+		//listModel.addElement(TITLEINFO);
 		populateList();
-		@SuppressWarnings("rawtypes")
 		JList list = new JList(listModel);
 		scrollPane.setViewportView(list);
 		contentPane.setLayout(gl_contentPane);
@@ -80,14 +85,14 @@ public class HighScore extends JFrame
 	public void populateList()
 	{
 		User currentUser;
+		User nextUser;
 		UserManager uM = new UserManager();
 		uM.retrieveUserList("data/userList.ser");
 		currentUser = uM.HighScoreMethod();
 		while(currentUser != null)
 		{
-			System.out.println("HERE");
-			addScore(currentUser.getName() + " \t\t\t" + currentUser.getScore(0) + " / " + currentUser.getScore(1) + " / " + currentUser.getScore(2) + " / " + currentUser.getScore(3));
-			System.out.println(currentUser.getName() + " \t\t\t" + currentUser.getScore(0) + " / " + currentUser.getScore(1) + " / " + currentUser.getScore(2) + " / " + currentUser.getScore(3));
+			
+			addScore("<html><div style=\"text-align: center;\">" + currentUser.getName()+ "<br> Score: /" + currentUser.getScore(0) +" / " + currentUser.getScore(1) + " / " + currentUser.getScore(2) + " / " + currentUser.getScore(3)+ "</html>");
 			currentUser = uM.HighScoreMethod();
 		}
 	}
