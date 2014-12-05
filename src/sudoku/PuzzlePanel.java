@@ -464,11 +464,8 @@ public class PuzzlePanel extends JFrame
 			pen = false;
 			erase = true;
 		}
-		
-	
 	}
 	
-
 	private class CellLabel extends JLabel
 	{
 		private static final long serialVersionUID = 453763732448995862L;

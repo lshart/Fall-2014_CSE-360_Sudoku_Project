@@ -189,9 +189,13 @@ public class UserPanel extends JFrame
 		
 		JButton btnHighScore = new JButton("High Score");
 		btnHighScore.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				HighScore score = new HighScore();
-				score.setVisible(true);
+			public void actionPerformed(ActionEvent e) 
+			{
+				if (thisManager.isListEmpty())
+				{
+					HighScore score = new HighScore();
+					score.setVisible(true);
+				}
 			}
 		});
 		btnHighScore.setBounds(213, 11, 113, 29);

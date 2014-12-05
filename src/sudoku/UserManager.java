@@ -15,8 +15,6 @@ public class UserManager
 	{
 		selectedUser = null;
 		userListHead = null;
-		
-		
 	}
 	
 	public boolean addUser(String name, String password)
@@ -196,6 +194,14 @@ public class UserManager
 			
 		}
 		
+	}
+	
+	public boolean isListEmpty()
+	{
+		if (userListHead == null)
+			return false;
+		else
+			return true;
 	}
 	
 	public class UserNode
