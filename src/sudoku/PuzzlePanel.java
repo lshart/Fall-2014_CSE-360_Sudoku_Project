@@ -359,7 +359,7 @@ public class PuzzlePanel extends JFrame
 							{
 								for (int c = 0; c < 9; c++)
 								{
-									if (!newManager.isHint(randrow, randcol))
+									if (!newManager.isHint(randrow, randcol) && newManager.getCellValueAt(randrow, randcol) == 0)
 									{
 										r = 9;
 										c = 9;
