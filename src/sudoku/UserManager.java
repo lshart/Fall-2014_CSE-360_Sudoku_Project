@@ -1,3 +1,7 @@
+/////////////
+// The UserManager class will get all user related informationl, it will keep track if you are loged on or off. 
+//It will also add new users to the user list. 
+/////////////
 package sudoku;
 
 import java.io.*;
@@ -10,13 +14,13 @@ public class UserManager
 	
 	UserNode tempCurrent = userListHead; // for highscores
 	UserNode tempNext = null;			//for highscores
-	
+// created defaut values for the list	
 	public UserManager()
 	{
 		selectedUser = null;
 		userListHead = null;
 	}
-	
+	// adds a new user to the user list
 	public boolean addUser(String name, String password)
 	{
 		boolean addedUser = false;
@@ -46,7 +50,7 @@ public class UserManager
 		
 		return addedUser;
 	}
-	
+	// this method will find a user within the user list
 	public boolean findUser(String name, String password)
 	{
 		boolean foundUser = false;
@@ -73,12 +77,12 @@ public class UserManager
 		
 		return foundUser;
 	}
-	
+	//returns the selected user
 	public User getSelectedUser()
 	{
 		return selectedUser;
 	}
-	
+	// will see if you are logged in
 	public boolean isLoggedIn()
 	{
 		if (selectedUser == null)
@@ -87,12 +91,13 @@ public class UserManager
 			return true;
 	}
 	
+	// checks to see if you are logged out
 	public boolean logOut()
 	{
 		selectedUser = null;
 		return true;
 	}
-	
+	// this method will store the user list to a file 
 	public boolean storeUserList (String fileName)
 	{
 		boolean savedFile = false;
@@ -127,6 +132,7 @@ public class UserManager
 	}
 	
 	@SuppressWarnings("unchecked")
+	// this method will get the user list from the file 
 	public boolean retrieveUserList (String fileName)
 	{
 		boolean loadedFile = false;
@@ -171,7 +177,7 @@ public class UserManager
 		
 		return loadedFile;
 	}
-	
+	// this will contain all high score info and it will return high score data
 	public User HighScoreMethod()
 	{
 		if(tempCurrent == null && tempNext == null)
@@ -194,7 +200,7 @@ public class UserManager
 		}
 		
 	}
-	
+	//checks to see if the user list is empty	
 	public boolean isListEmpty()
 	{
 		if (userListHead == null)
@@ -202,28 +208,28 @@ public class UserManager
 		else
 			return true;
 	}
-	
+	// makes a new user node
 	public class UserNode
 	{
 		private User thisUser;
 		private UserNode nextUser;
-		
+		// make the node
 		public UserNode(User newUser)
 		{
 			thisUser = newUser;
 			nextUser = null;
 		}
-		
+		// return the user
 		public User getUser()
 		{
 			return thisUser;
 		}
-		
+		// get the next user in the list
 		public UserNode getNextUser()
 		{
 			return nextUser;
 		}
-		
+		// will set the next user
 		public void setNextUser(UserNode next)
 		{
 			nextUser = next;
