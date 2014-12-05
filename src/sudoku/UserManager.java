@@ -176,7 +176,6 @@ public class UserManager
 	{
 		if(tempCurrent == null && tempNext == null)
 		{
-			System.out.println("wrong");
 			tempCurrent = userListHead;
 			tempNext = tempCurrent;
 			tempCurrent = tempCurrent.getNextUser();
