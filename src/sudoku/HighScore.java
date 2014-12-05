@@ -1,13 +1,9 @@
 package sudoku;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JButton;
-
 import java.awt.Color;
 
 import javax.swing.DefaultListModel;
@@ -16,9 +12,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JList;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class HighScore extends JFrame 
@@ -85,7 +78,6 @@ public class HighScore extends JFrame
 	public void populateList()
 	{
 		User currentUser;
-		User nextUser;
 		UserManager uM = new UserManager();
 		uM.retrieveUserList("data/userList.ser");
 		currentUser = uM.HighScoreMethod();
