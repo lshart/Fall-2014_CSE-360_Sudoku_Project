@@ -1,3 +1,7 @@
+/////////////
+//The UserPanel class makes the panel to create username, create password, the login and logout features, it also contains
+//the level selcetion. 
+/////////////
 package sudoku;
 
 import javax.swing.JFrame;
@@ -15,6 +19,7 @@ import javax.swing.JCheckBox;
 
 public class UserPanel extends JFrame 
 {
+	//declares global variables for UserPanel class
 	private static final long serialVersionUID = -5802065054242533217L;
 	private JPanel contentPane;
 	private JLabel messageLable;
