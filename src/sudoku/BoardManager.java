@@ -1,6 +1,9 @@
+/////////////
+// This class is meant to manage the game board, though it relies on its components to handle much of the logic.
+/////////////
 package sudoku;
 
-// This class is meant to manage the game board, though it relies on its components to handle much of the logic.
+
 public class BoardManager 
 {	
 	private Board board;		// This will be 9 by 9
@@ -18,7 +21,7 @@ public class BoardManager
 	
 	
 	public BoardManager(int diff, User currU)
-	{	
+	{ // gets difficulty and retuns the puzzel that matches, number of hints used.
 		board = new Board(diff);
 		difficulty = diff;   
 		currentUser = currU;
@@ -45,31 +48,32 @@ public class BoardManager
 		currentUser.startGame(difficulty);
 		currentNum = 1;
 	}
-	
+	// will return correct hint value
 	public boolean isHint(int row, int col)
 	{
 		return board.isHint(row, col);
 	}
-	
+	// asks if this is the right cell
 	public boolean isCellCorrect(int row, int col)
 	{
 		return board.isCellCorrect(row, col);
 	}
+	// allows a number to be places
 	public boolean placeNum(int row, int col)
 	{
 		return board.placeValue(row, col, currentNum);
 	}
-	
+	// gets the current cell value
 	public int getCellValueAt(int row, int col)
 	{
 		return board.getCellValue(row, col);
 	}
-	
+	// this will remove a number
 	public boolean removeNum(int row, int col)
 	{
 		return board.removeCellValue(row, col);
 	}
-	
+	//allows the correct cell to be placed
 	public void placeCorrectCell(int row, int col)
 	{
 		board.correctCell(row, col);
@@ -86,37 +90,37 @@ public class BoardManager
 		else
 			return -1;
 	}
-	
+	// returns the hints
 	public int getHints()
 	{
 		return hints;
 	}
-	
+	//will get the difficulty
 	public int getDifficulty()
 	{
 		return difficulty;
 	}
-	
+	//obtains the current user
 	public User getCurrentUser()
 	{
 		return currentUser;
 	}
-	
+	// gets the number that is currently in the cell
 	public int getCurrentNum()
 	{
 		return currentNum;
 	}
-	
+	// will set the current number to a new number
 	public void setCurrentNum(int newNum)
 	{
 		currentNum = newNum;
 	}
-	
+	//gets the time
 	public int getParTime()
 	{
 		return parTime;
 	}
-	
+	// will set the over time value
 	public void set_overTime()
 	{
 		if(!overTime)
@@ -124,11 +128,12 @@ public class BoardManager
 			overTime = !overTime;
 		}
 	}
+	//returns the over time value
 	public boolean get_overTime()
 	{
 		return overTime;		
 	}
-	
+	// if the users has won get the information
 	public boolean hasWon(int min, int sec)
 	{
 		boolean won = board.hasWon();
@@ -138,7 +143,7 @@ public class BoardManager
 		}
 		return won;
 	}
-	
+	// this solves the board
 	public void cheatWin()
 	{
 		board.solveBoard();
