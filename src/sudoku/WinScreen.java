@@ -55,6 +55,7 @@ public class WinScreen extends JFrame
 		contentPane.add(timeLabel);
 		
 		JButton btnOkay = new JButton("Okay");// if the okay button is pressed then go back to user pannel
+		btnOkay.setBounds(105, 184, 89, 23);
 		btnOkay.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -65,7 +66,7 @@ public class WinScreen extends JFrame
 				dispose();
 			}
 		});
-		btnOkay.setBounds(105, 184, 89, 23);
+		
 		contentPane.add(btnOkay);
 	}
 }
