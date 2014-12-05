@@ -44,11 +44,14 @@ public class Board
 		return board[row][col].isClue();
 		
 	}
+	
+	// Checks to see if the specified cell has a correct answer in it.  Is used by the AI
 	public boolean isCellCorrect(int row, int col)
 	{
 		return board[row][col].isCorrect();
 	}
 	
+	// Places the given value into the cell specified by the give row and col
 	public boolean placeValue(int row, int col, int numToPlace)
 	{
 		if (checkPlace(row, col, numToPlace))
@@ -56,12 +59,10 @@ public class Board
 			return board[row][col].setValue(numToPlace);
 		}
 		else
-		{
-		//	board[row][col].setValue(numToPlace);
 			return false;
-		}
 	}
 	
+	//  Places a correct value into the specified cell.  Is used by the AI
 	public void correctCell(int row, int col)
 	{
 		board[row][col].solveCell();
