@@ -1,5 +1,5 @@
 /////////////
-// The Sudoku class is the main method it makes a new user list and manager 
+// The Sudoku class is the main method
 /////////////
 package sudoku;
 
