@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.SwingConstants;
+import javax.swing.JCheckBox;
 
 
 public class UserPanel extends JFrame 
@@ -21,6 +22,7 @@ public class UserPanel extends JFrame
 	private JTextField userField;
 	private UserManager thisManager;
 	private boolean loggedIn;
+	JCheckBox AICheckbox;
 	JButton logOutButton;
 	JButton btnHard, btnEasy, btnEvil, btnMedium, btnCreateNewUser; 
 
@@ -57,8 +59,9 @@ public class UserPanel extends JFrame
 			{
 				if (loggedIn)
 				{
+					boolean AI = AICheckbox.isSelected();
 					BoardManager bMe = new BoardManager(0, thisManager.getSelectedUser());
-					PuzzlePanel panel = new PuzzlePanel(bMe, thisManager);// get new puzzle board
+					PuzzlePanel panel = new PuzzlePanel(bMe, thisManager, AI);// get new puzzle board
 					panel.setVisible(true);
 					contentPane.setVisible(false);// destroy the old content pane
 					dispose();
@@ -75,8 +78,9 @@ public class UserPanel extends JFrame
 			{
 				if (loggedIn)
 				{
+					boolean AI = AICheckbox.isSelected();
 					BoardManager bMe = new BoardManager(1, thisManager.getSelectedUser());
-					PuzzlePanel panel = new PuzzlePanel(bMe, thisManager);// get new puzzle board
+					PuzzlePanel panel = new PuzzlePanel(bMe, thisManager, AI);// get new puzzle board
 					panel.setVisible(true);
 					contentPane.setVisible(false);
 					dispose();
@@ -94,8 +98,9 @@ public class UserPanel extends JFrame
 			{
 				if (loggedIn)
 				{
+					boolean AI = AICheckbox.isSelected();
 					BoardManager bMe = new BoardManager(2, thisManager.getSelectedUser());
-					PuzzlePanel panel = new PuzzlePanel(bMe,thisManager);// get new puzzle board
+					PuzzlePanel panel = new PuzzlePanel(bMe,thisManager, AI);// get new puzzle board
 					panel.setVisible(true);
 					contentPane.setVisible(false);
 					dispose();
@@ -113,8 +118,9 @@ public class UserPanel extends JFrame
 			{
 				if (loggedIn)
 				{
+					boolean AI = AICheckbox.isSelected();
 					BoardManager bMe = new BoardManager(3, thisManager.getSelectedUser());
-					PuzzlePanel panel = new PuzzlePanel(bMe, thisManager);// get new puzzle board
+					PuzzlePanel panel = new PuzzlePanel(bMe, thisManager, AI);// get new puzzle board
 					panel.setVisible(true);
 					contentPane.setVisible(false);
 					dispose();
@@ -147,7 +153,7 @@ public class UserPanel extends JFrame
 		lblNewLabel.setForeground(Color.RED);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblNewLabel.setBackground(new Color(30, 144, 255));
-		lblNewLabel.setBounds(67, 11, 208, 65);
+		lblNewLabel.setBounds(67, 22, 208, 65);
 		contentPane.add(lblNewLabel);
 		
 		messageLable = new JLabel("");
@@ -188,8 +194,15 @@ public class UserPanel extends JFrame
 				score.setVisible(true);
 			}
 		});
-		btnHighScore.setBounds(237, 11, 89, 23);
+		btnHighScore.setBounds(213, 11, 113, 29);
+		btnHighScore.setFocusable(false);
 		contentPane.add(btnHighScore);
+		
+		AICheckbox = new JCheckBox("Activate AI");
+		AICheckbox.setBackground(new Color(245, 245, 245));
+		AICheckbox.setFocusable(false);
+		AICheckbox.setBounds(50, 17, 97, 23);
+		contentPane.add(AICheckbox);
 		}
 	
 	private class NewUserAction implements ActionListener

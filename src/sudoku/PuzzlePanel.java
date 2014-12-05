@@ -29,6 +29,7 @@ public class PuzzlePanel extends JFrame
 	private boolean pen;
 	private boolean erase;
 	private boolean overtime_check;
+	private boolean hasAI;
 	private DecimalFormat leadingZero = new DecimalFormat("#00");
 	private myTimer gameTime;
 	private JLabel lblCurrentPlayer;
@@ -37,15 +38,17 @@ public class PuzzlePanel extends JFrame
 	private JPanel gridSubPanel;
 	private JPanel messagePanel;
 	
-	public PuzzlePanel(BoardManager nManager, UserManager uManager) 
+	public PuzzlePanel(BoardManager nManager, UserManager uManager, boolean aI) 
 	{	
 		JPanel cellGridPanel = new JPanel();
 		thisUserManager = uManager;
 		thisUserManager.storeUserList(Sudoku.FILE_NAME);
+		overtime_check = false;
+		hasAI = aI;
 		
 		timeLabel = new JLabel("Time: 00:00");
 		gameTime = new myTimer(timeLabel, this);
-		
+
 		newManager = nManager;
 		
 		int tempParTime = newManager.getParTime();
@@ -56,7 +59,6 @@ public class PuzzlePanel extends JFrame
 		addKeyListener(new KeyWatcher());
 		setFocusable(true);
 		
-		overtime_check = false;
 		
 		cellLabelGrid = new CellLabel[9][9];
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,6 +89,20 @@ public class PuzzlePanel extends JFrame
 				cellGridPanel.add(cellLabelGrid[r][c]);
 			}
 		
+		for (int i = 0; i < 9; i++)
+			cellLabelGrid[i][2].setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+		for (int i = 0; i < 9; i++)
+			cellLabelGrid[i][5].setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+		for (int i = 0; i < 9; i++)
+			cellLabelGrid[3][i].setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
+		for (int i = 0; i < 9; i++)
+			cellLabelGrid[6][i].setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
+		
+		cellLabelGrid[3][2].setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1, Color.BLACK));
+		cellLabelGrid[3][5].setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1, Color.BLACK));
+		cellLabelGrid[6][2].setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1, Color.BLACK));
+		cellLabelGrid[6][5].setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1, Color.BLACK));
+		
 		String curUserStr = newManager.getCurrentUser().getName();
 
 		String winStr = newManager.getCurrentUser().printUserScore();
@@ -112,12 +128,12 @@ public class PuzzlePanel extends JFrame
 				
 				messagePanel = new JPanel();
 				messagePanel.setBackground(new Color(245, 245, 245));
-				messagePanel.setBounds(10, 426, 99, 17);
+				messagePanel.setBounds(10, 412, 99, 83);
 				gridSubPanel.add(messagePanel);
 				messagePanel.setLayout(null);
 				
 				messageLabel = new JLabel("");
-				messageLabel.setBounds(0, 0, 0, 0);
+				messageLabel.setBounds(0, 0, 99, 83);
 				messagePanel.add(messageLabel);
 				messageLabel.setForeground(Color.ORANGE);
 				messageLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -126,18 +142,18 @@ public class PuzzlePanel extends JFrame
 				
 				scorePanel = new JPanel();
 				scorePanel.setBackground(new Color(245, 245, 245));
-				scorePanel.setBounds(140, 412, 214, 33);
+				scorePanel.setBounds(140, 412, 226, 55);
 				gridSubPanel.add(scorePanel);
 				scorePanel.setLayout(null);
 				
 				lblCurrentPlayer = new JLabel("Current Player:");
-				lblCurrentPlayer.setBounds(10, 11, 87, 16);
+				lblCurrentPlayer.setBounds(4, 19, 87, 16);
 				scorePanel.add(lblCurrentPlayer);
 				lblCurrentPlayer.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				
 				JLabel userLabel = new JLabel("");
 				userLabel.setBackground(new Color(245, 245, 245));
-				userLabel.setBounds(111, 11, 97, 16);
+				userLabel.setBounds(93, 11, 131, 33);
 				scorePanel.add(userLabel);
 				userLabel.setText("<html><div style=\"text-align: left;\">" + curUserStr + " " + winStr + "</html>");
 				userLabel.setHorizontalTextPosition(SwingConstants.LEFT);
@@ -251,21 +267,21 @@ public class PuzzlePanel extends JFrame
 	
 	public void updatePanel()
 	{
-		toggle_overtime();
 		for (int r = 0; r < 9; r++)
 		{
 			for (int c = 0; c < 9; c++)
 			{
 				if (newManager.getCellValueAt(r, c) != 0)
+				{
+					if (!newManager.isHint(r, c))
+						cellLabelGrid[r][c].setForeground(Color.BLUE);
 					cellLabelGrid[r][c].setText(newManager.getCellValueAt(r, c) + "");
+				}
 				else
 					cellLabelGrid[r][c].setText("");
-				
-				System.out.print(newManager.getCellValueAt(r, c) + " ");
 			}
-			System.out.println();
+
 		}
-		System.out.println();
 		
 		currNumLabel.setText(newManager.getCurrentNum() + "");
 		hintLabel.setText("Hints: " + newManager.getHints());
@@ -298,7 +314,6 @@ public class PuzzlePanel extends JFrame
 			{
 				if(!newManager.placeNum(theRow, theCol))
 				{
-					//messageLabel.setText("<html><div style=\"text-align: center;\">INVALID<br> MOVE</html>");
 					if(!newManager.isHint(theRow, theCol))
 					{
 						if(cellLabelGrid[theRow][theCol].getText().equalsIgnoreCase(""))
@@ -318,6 +333,55 @@ public class PuzzlePanel extends JFrame
 					messageLabel.setText(null);
 					cellLabelGrid[theRow][theCol].setForeground(Color.BLACK);
 					updatePanel();
+					if (newManager.hasWon(gameTime.getMin(), gameTime.getSec()))
+					{
+						WinScreen panel = new WinScreen(thisUserManager, gameTime.getMin(), gameTime.getSec());
+						panel.setVisible(true);
+						contentPane.setVisible(false);
+						dispose();
+					}
+					
+					if (hasAI)
+					{
+						if(!newManager.isCellCorrect(theRow, theCol))
+						{
+							newManager.removeNum(theRow, theCol);
+							messageLabel.setText("<html><div style=\"text-align: center;\">AI says, <br>\"Bad move!\"</html>");
+							gameTime.setSec(5);
+							updatePanel();
+						}
+						else
+						{
+							int randrow = ((int)(Math.random() * 9.0));
+							int randcol = ((int)(Math.random() * 9.0));
+							
+							for (int r = 0; r < 9; r++)
+							{
+								for (int c = 0; c < 9; c++)
+								{
+									if (!newManager.isHint(randrow, randcol))
+									{
+										r = 9;
+										c = 9;
+										newManager.placeCorrectCell(randrow, randcol);
+										messageLabel.setText("<html><div style=\"text-align: center;\">AI says, <br>\"Placed Number at\" <br>"+ randrow + ", " + randcol +"</html>");
+										updatePanel();
+									}
+									randcol++;
+									if (randcol > 8)
+										randcol = 0;
+								}
+								
+								randcol = ((int)(Math.random() * 9.0));
+								randrow++;
+								if (randrow > 8)
+									randrow = 0;
+							}
+								
+						}
+						
+					}
+					
 					if (newManager.hasWon(gameTime.getMin(), gameTime.getSec()))
 					{
 						WinScreen panel = new WinScreen(thisUserManager, gameTime.getMin(), gameTime.getSec());
@@ -370,7 +434,7 @@ public class PuzzlePanel extends JFrame
 				String message = "<html><div style=\"text-align: center;\">"+ temp + " incorrect cells <br> removed</html>";
 				
 				messageLabel.setText(message);
-				gameTime.setSec(5);
+				gameTime.setSec(5*temp);
 				updatePanel();
 			}
 			else

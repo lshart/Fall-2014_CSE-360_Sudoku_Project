@@ -44,8 +44,10 @@ public class Board
 		return board[row][col].isClue();
 		
 	}
-	
-	
+	public boolean isCellCorrect(int row, int col)
+	{
+		return board[row][col].isCorrect();
+	}
 	
 	public boolean placeValue(int row, int col, int numToPlace)
 	{
@@ -59,6 +61,12 @@ public class Board
 			return false;
 		}
 	}
+	
+	public void correctCell(int row, int col)
+	{
+		board[row][col].solveCell();
+	}
+	
 	
 	// Asks the Cell to attempt to remove a value from a cell.  If it is one of the clues, then
 	// it returns false.

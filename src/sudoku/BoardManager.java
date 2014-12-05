@@ -49,7 +49,11 @@ public class BoardManager
 	public boolean isHint(int row, int col)
 	{
 		return board.isHint(row, col);
-		
+	}
+	
+	public boolean isCellCorrect(int row, int col)
+	{
+		return board.isCellCorrect(row, col);
 	}
 	public boolean placeNum(int row, int col)
 	{
@@ -64,6 +68,11 @@ public class BoardManager
 	public boolean removeNum(int row, int col)
 	{
 		return board.removeCellValue(row, col);
+	}
+	
+	public void placeCorrectCell(int row, int col)
+	{
+		board.correctCell(row, col);
 	}
 	
 	// A return of -1 means no hints remain
