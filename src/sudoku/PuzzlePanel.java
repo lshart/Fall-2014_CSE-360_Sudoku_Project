@@ -1,3 +1,7 @@
+/////////////
+// The PuzzlePanel class makes a new puzzle panel, each time the level difficulty is chosen. 
+//Makes the 9x9 board, buttons and contains action listiners.
+/////////////
 package sudoku;
 
 import java.awt.*;
@@ -15,6 +19,7 @@ import java.text.DecimalFormat;
 
 public class PuzzlePanel extends JFrame 
 {
+	//declares global variables for the PuzzlePanel class
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
@@ -229,7 +234,7 @@ public class PuzzlePanel extends JFrame
 				gbc_hintLabel.gridy = 7;
 				contentPane.add(hintLabel, gbc_hintLabel);
 		
-		btnQuit = new JButton("Quit");
+		btnQuit = new JButton("Quit");// if this button is pushed makes a new user panel
 		btnQuit.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -249,7 +254,7 @@ public class PuzzlePanel extends JFrame
 		
 		updatePanel();
 	}
-	
+	// will get the time incase it has overtime 
 	public void toggle_overtime()
 	{
 		if (!overtime_check)
@@ -260,11 +265,12 @@ public class PuzzlePanel extends JFrame
 		}
 		
 	}
+	//returns the overtime value
 	public boolean get_overtime()
 	{
 		return overtime_check;
 	}
-	
+	// updates the puzzle panel according to the information it is given 
 	public void updatePanel()
 	{
 		for (int r = 0; r < 9; r++)
@@ -288,13 +294,13 @@ public class PuzzlePanel extends JFrame
 		
 		contentPane.updateUI();
 	}
-	
+	// sets the time label
 	public void setParTime(int time)
 	{
 		parTimeLabel.setText("Par Time: " + time + " : 00");
 		
 	}
-	
+	// gives each cell its own mouse adapter for when it is click the numbers will change
 	private class CellAction extends MouseAdapter
 	{
 		public void mouseClicked(MouseEvent cell) 
@@ -395,7 +401,7 @@ public class PuzzlePanel extends JFrame
 					
 		}
 	}
-	
+	// makes a new keyboard listiner, when a number is pressed it is the number that will be placed on the board
 	private class KeyWatcher extends KeyAdapter
 	{
 		public void keyPressed(KeyEvent key) 
@@ -423,7 +429,7 @@ public class PuzzlePanel extends JFrame
 			}
 		}
 	}
-	
+	// when the hint button is pressed see if you have hints left and if you do return a hint else a message
 	private class HintButton implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e) 
@@ -445,7 +451,7 @@ public class PuzzlePanel extends JFrame
 			}
 		}
 	}
-	
+	// makes it so when the pencil button is pressed you do not have the ablility to use the eraser function
 	private class penButton implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e) 
@@ -456,7 +462,7 @@ public class PuzzlePanel extends JFrame
 		
 	
 	}
-	
+	// makes it so when the eraser button is pressed you do not have the ablility to use the pencil function
 	private class eraseButton implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e) 
@@ -465,23 +471,23 @@ public class PuzzlePanel extends JFrame
 			erase = true;
 		}
 	}
-	
+	// makes each cell a JLabel
 	private class CellLabel extends JLabel
 	{
 		private static final long serialVersionUID = 453763732448995862L;
 		private int row;
 		private int col;
-		
+	
 		public CellLabel(int r, int c)
 		{
 			super();
 			row = r;
 			col = c;
 		}
-		
+		//gets the row
 		public int getRow()
 		{	return row;	}
-		
+		// gets the column
 		public int getCol()
 		{	return col;	}
 	}
