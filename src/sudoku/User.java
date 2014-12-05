@@ -35,10 +35,10 @@ public class User implements Serializable
 		winCount[difficulty] --;
 	}
 	// Decides if the user will win
-	public void win(int difficulty, int min, int sec, boolean underPar)
+	public void win(int difficulty, int min, int sec, boolean OverPar)
 	{
 		int time = min*60 + sec;
-		if (underPar)
+		if (!OverPar)
 		{
 			if (fastestTime[difficulty] > time || fastestTime[difficulty] < -1)
 			{
