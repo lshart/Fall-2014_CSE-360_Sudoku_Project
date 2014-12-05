@@ -12,9 +12,7 @@ public class UserManager
 	private User selectedUser;
 	private UserNode userListHead;
 	
-	UserNode tempCurrent = userListHead; // for highscores
-	UserNode tempNext = null;			//for highscores
-// created defaut values for the list	
+
 	public UserManager()
 	{
 		selectedUser = null;
@@ -177,29 +175,11 @@ public class UserManager
 		
 		return loadedFile;
 	}
-	// this will contain all high score info and it will return high score data
-	public User HighScoreMethod()
+	public UserNode getHeadUser()
 	{
-		if(tempCurrent == null && tempNext == null)
-		{
-			tempCurrent = userListHead;
-			tempNext = tempCurrent;
-			tempCurrent = tempCurrent.getNextUser();
-			return tempNext.getUser();
-		}
-		else if (tempCurrent == null && tempNext != null)
-		{
-			return null;
-		}
-		else
-		{
-			tempNext = tempCurrent;
-			tempCurrent = tempCurrent.getNextUser();
-			return tempNext.getUser();
-			
-		}
-		
+		return userListHead;
 	}
+
 	//checks to see if the user list is empty	
 	public boolean isListEmpty()
 	{
@@ -207,32 +187,5 @@ public class UserManager
 			return false;
 		else
 			return true;
-	}
-	// makes a new user node
-	public class UserNode
-	{
-		private User thisUser;
-		private UserNode nextUser;
-		// make the node
-		public UserNode(User newUser)
-		{
-			thisUser = newUser;
-			nextUser = null;
-		}
-		// return the user
-		public User getUser()
-		{
-			return thisUser;
-		}
-		// get the next user in the list
-		public UserNode getNextUser()
-		{
-			return nextUser;
-		}
-		// will set the next user
-		public void setNextUser(UserNode next)
-		{
-			nextUser = next;
-		}
 	}
 }

@@ -199,10 +199,13 @@ public class UserPanel extends JFrame
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				messageLable.setText("<html><div style=\"text-align: center;\">" + thisManager.getSelectedUser().getName() + "<br> Logged Out<html>");
-				thisManager.logOut();
-				logOutButton.setText("Log off");
-				loggedIn = false;
+				if (loggedIn)
+				{
+					messageLable.setText("<html><div style=\"text-align: center;\">" + thisManager.getSelectedUser().getName() + "<br> Logged Out<html>");
+					thisManager.logOut();
+					logOutButton.setText("Log off");
+					loggedIn = false;
+				}
 			}
 		});
 		if (thisManager.getSelectedUser() != null)
@@ -218,7 +221,7 @@ public class UserPanel extends JFrame
 			{
 				if (thisManager.isListEmpty())
 				{
-					HighScore score = new HighScore();
+					HighScore score = new HighScore(thisManager);
 					score.setVisible(true);
 				}
 			}

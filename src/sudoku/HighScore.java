@@ -18,13 +18,16 @@ public class HighScore extends JFrame
 {
 
 	private JPanel contentPane;
+	private UserManager thisUserManager;
 
 	DefaultListModel<String> listModel = new DefaultListModel<String>();
 	
 	
 	JList<String> scores;
 	
-	public HighScore() {
+	public HighScore(UserManager thisUM) 
+	{
+		thisUserManager = thisUM;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 317, 455);
 		contentPane = new JPanel();
@@ -67,15 +70,13 @@ public class HighScore extends JFrame
 	
 	public void populateList()
 	{
-		User currentUser;
-		UserManager uM = new UserManager();
-		uM.retrieveUserList("data/userList.ser");
-		currentUser = uM.HighScoreMethod();
+		UserNode currentUser = thisUserManager.getHeadUser();
+	
 		while(currentUser != null)
 		{
 			
-			addScore("<html><div style=\"text-align: center;\">" + currentUser.getName()+ "<br> Score: /" + currentUser.getScore(0) +" / " + currentUser.getScore(1) + " / " + currentUser.getScore(2) + " / " + currentUser.getScore(3)+ "</html>");
-			currentUser = uM.HighScoreMethod();
+			addScore("<html><div style=\"text-align: center;\">" + currentUser.getUser().getName()+ "<br> Score: /" + currentUser.getUser().getScore(0) +" / " + currentUser.getUser().getScore(1) + " / " + currentUser.getUser().getScore(2) + " / " + currentUser.getUser().getScore(3)+ "</html>");
+			currentUser = currentUser.getNextUser();
 		}
 	}
 	
