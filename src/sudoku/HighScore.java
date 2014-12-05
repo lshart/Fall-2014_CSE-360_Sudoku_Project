@@ -19,20 +19,11 @@ public class HighScore extends JFrame
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	/**
-	 * Create the frame.
-	 */
-	private static final String TITLEINFO = "<html><div style=\"text-align: center;\">User Name<br> Score: / Easy / Medium / Hard / Evil</html>";
-	DefaultListModel<String> listModel = new DefaultListModel();
+	DefaultListModel<String> listModel = new DefaultListModel<String>();
 	
 	
-	@SuppressWarnings("rawtypes")
-	JList scores;
+	JList<String> scores;
 	
-	@SuppressWarnings("unchecked")
 	public HighScore() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 317, 455);
@@ -66,9 +57,8 @@ public class HighScore extends JFrame
 		
 		
 		scrollPane.setViewportView(scores);
-		//listModel.addElement(TITLEINFO);
 		populateList();
-		JList list = new JList(listModel);
+		JList<String> list = new JList<String>(listModel);
 		scrollPane.setViewportView(list);
 		contentPane.setLayout(gl_contentPane);
 		

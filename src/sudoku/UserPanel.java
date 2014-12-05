@@ -71,6 +71,11 @@ public class UserPanel extends JFrame
 					contentPane.setVisible(false);// destroy the old content pane
 					dispose();
 				}
+				else
+				{
+					messageLable.setText("<html><div style=\"text-align: center;\">Please log in<br>first</html>");
+					contentPane.updateUI();
+				}
 			}
 		});
 		contentPane.add(btnEasy);
@@ -89,6 +94,11 @@ public class UserPanel extends JFrame
 					panel.setVisible(true);
 					contentPane.setVisible(false);
 					dispose();
+				}
+				else
+				{
+					messageLable.setText("<html><div style=\"text-align: center;\">Please log in<br>first</html>");
+					contentPane.updateUI();
 				}
 			}
 		});
@@ -110,6 +120,11 @@ public class UserPanel extends JFrame
 					contentPane.setVisible(false);
 					dispose();
 				}
+				else
+				{
+					messageLable.setText("<html><div style=\"text-align: center;\">Please log in<br>first</html>");
+					contentPane.updateUI();
+				}
 			}
 		});
 		contentPane.add(btnHard);
@@ -129,6 +144,11 @@ public class UserPanel extends JFrame
 					panel.setVisible(true);
 					contentPane.setVisible(false);
 					dispose();
+				}
+				else
+				{
+					messageLable.setText("<html><div style=\"text-align: center;\">Please log in<br>first</html>");
+					contentPane.updateUI();
 				}
 			}
 		});
@@ -164,7 +184,7 @@ public class UserPanel extends JFrame
 		messageLable = new JLabel("");
 		messageLable.setHorizontalAlignment(SwingConstants.CENTER);
 		messageLable.setForeground(SystemColor.menuText);
-		messageLable.setBounds(201, 228, 113, 42);
+		messageLable.setBounds(201, 222, 113, 48);
 		contentPane.add(messageLable);
 		
 		JButton loginButton = new JButton("Login");

@@ -339,13 +339,6 @@ public class PuzzlePanel extends JFrame
 					messageLabel.setText(null);
 					cellLabelGrid[theRow][theCol].setForeground(Color.BLACK);
 					updatePanel();
-					if (newManager.hasWon(gameTime.getMin(), gameTime.getSec()))
-					{
-						WinScreen panel = new WinScreen(thisUserManager, gameTime.getMin(), gameTime.getSec());
-						panel.setVisible(true);
-						contentPane.setVisible(false);
-						dispose();
-					}
 					
 					if (hasAI)
 					{
